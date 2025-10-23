@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bmpescados_app/pages/home_page.dart';
+import 'package:bmpescados_app/pages/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

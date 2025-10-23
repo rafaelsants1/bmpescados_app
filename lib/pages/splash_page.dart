@@ -60,7 +60,7 @@ class _SplashPageState extends State<SplashPage>
       body: Center(
         child: ClipOval(
           child: Image.asset(
-            '../assets/logo.png',
+            'assets/logo.png',
             width: 160,
             fit: BoxFit.cover,
           ),

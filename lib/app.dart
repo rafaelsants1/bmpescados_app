@@ -1,4 +1,4 @@
-import 'package:bmpescados_app/pages/splash_page.dart';
+import 'pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';
 
@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashPage(),
+      home: SplashPage(),
       );
     }
 }

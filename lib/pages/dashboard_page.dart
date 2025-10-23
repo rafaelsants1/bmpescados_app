@@ -1,4 +1,5 @@
 import 'package:bmpescados_app/pages/login_page.dart';
+import 'package:bmpescados_app/pages/retirada_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
 
@@ -158,12 +159,40 @@ class _HomePageState extends State<HomePage> {
                         icon: Icons.inventory,
                         label: 'Estoque',
                         onTap: () {
-                          // Ação ao clicar
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RetiradaPage()),
+                  );
                         },
                       ), 
                     ),
                   ],
                 ),
+
+                const SizedBox(height: 20),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.bus_alert,
+                        label: 'Entregas',
+                        onTap: () {
+                          // Ação ao clicar
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.article, 
+                        label: 'Relatórios',
+                        onTap: (){
+                          // Ação ao clicar
+                        },
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

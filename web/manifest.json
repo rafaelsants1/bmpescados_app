@@ -1,6 +1,6 @@
 {
-    "name": "bmpescados_app",
-    "short_name": "bmpescados_app",
+    "name": "meu_app",
+    "short_name": "meu_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

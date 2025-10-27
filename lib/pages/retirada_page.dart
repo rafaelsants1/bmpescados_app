@@ -53,6 +53,7 @@ class _RetiradaPageState extends State<RetiradaPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Início',
+
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.inventory_2),

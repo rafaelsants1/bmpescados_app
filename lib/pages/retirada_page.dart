@@ -1,5 +1,9 @@
+import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:bmpescados_app/widgets/bottom_nav.dart';
+import 'package:bmpescados_app/pages/updatestock_page.dart';
 
 class RetiradaPage extends StatefulWidget {
   const RetiradaPage({super.key});
@@ -37,36 +41,15 @@ class _RetiradaPageState extends State<RetiradaPage> {
         estoque: estoque,
         onRetirar: retirarEstoque,
       ),
-      const Center(child: Text("📋 Relatórios")),
+      const Center(child: Text("📋 Pedidos")),
       const Center(child: Text("🚚 Entregas")),
     ];
 
     return Scaffold(
       body: pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Início',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory_2),
-            label: 'Estoque',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
-            label: 'Relatórios',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_shipping),
-            label: 'Entregas',
-          ),
-        ],
+        onItemTapped: _onItemTapped,        
       ),
     );
   }
@@ -87,19 +70,23 @@ class TelaEstoque extends StatelessWidget {
     final total = estoque.values.fold(0.0, (a, b) => a + b);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF189CFF), // fundo azul superior
+      backgroundColor: const Color(0xFF1494F6), // fundo azul superior
       body: Column(
         children: [
-          const SizedBox(height: 40),
-          const Text(
-            'Estoque',
-            style: TextStyle(
-              fontSize: 26,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+            width: double.infinity,
+            child: const Center(
+              child: Text(
+                'Estoque',
+                style: TextStyle(
+                  fontSize: 26,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-          const SizedBox(height: 12),
           Expanded(
             child: Container(
               width: double.infinity,
@@ -153,14 +140,14 @@ class TelaEstoque extends StatelessWidget {
                             ),
                             trailing: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF189CFF),
+                                backgroundColor: const Color(0xFF1494F6),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 10),
                               ),
                               onPressed: () async {
                                 final retirada = await Navigator.push(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                     builder: (_) => TelaRetirar(peixe: peixe),
                                   ),
                                 );
@@ -178,6 +165,31 @@ class TelaEstoque extends StatelessWidget {
                       }).toList(),
                     ),
                   ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context, 
+                          CupertinoPageRoute(builder: (context) => UpdatePage())
+                          );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amber,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                      child: const Text(
+                        '!!!Botão temporário!!!',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white
+                        ),
+                      ),
+                      ),
+                    )
                 ],
               ),
             ),
@@ -215,7 +227,7 @@ class _TelaRetirarState extends State<TelaRetirar> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Retirar ${widget.peixe}'),
-        backgroundColor: const Color(0xFF189CFF),
+        backgroundColor: const Color(0xFF1494F6),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -244,7 +256,7 @@ class _TelaRetirarState extends State<TelaRetirar> {
               child: ElevatedButton(
                 onPressed: confirmar,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF189CFF),
+                  backgroundColor: const Color(0xFF1494F6),
                   padding: const EdgeInsets.symmetric(
                       horizontal: 40, vertical: 16),
                 ),

@@ -1,3 +1,4 @@
+import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/retirada_page.dart';
@@ -152,6 +153,10 @@ class _HomePageState extends State<HomePage> {
                         label: 'Pedidos',
                         onTap: () {
                           // Ação ao clicar
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IncluirItensPage()),
+                          );
                         },
                       ), 
                     ),

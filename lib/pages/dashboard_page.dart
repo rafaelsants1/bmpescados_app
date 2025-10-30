@@ -1,5 +1,6 @@
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/retirada_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                 Future.delayed(const Duration(seconds:2), () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    CupertinoPageRoute(builder: (context) => LoginPage()),
                   );
                 });
                 break;
@@ -166,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => RetiradaPage()),
+                            CupertinoPageRoute(builder: (context) => RetiradaPage()),
                   );
                         },
                       ), 
@@ -180,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Expanded(
                       child: DashboardButton(
-                        icon: Icons.bus_alert,
+                        icon: Icons.local_shipping,
                         label: 'Entregas',
                         onTap: () {
                           // Ação ao clicar

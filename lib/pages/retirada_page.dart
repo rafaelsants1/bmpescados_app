@@ -37,10 +37,7 @@ class _RetiradaPageState extends State<RetiradaPage> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       const Center(child: Text("🏠 Página Inicial")),
-      TelaEstoque(
-        estoque: estoque,
-        onRetirar: retirarEstoque,
-      ),
+      TelaEstoque(estoque: estoque, onRetirar: retirarEstoque),
       const Center(child: Text("📋 Pedidos")),
       const Center(child: Text("🚚 Entregas")),
     ];
@@ -49,29 +46,8 @@ class _RetiradaPageState extends State<RetiradaPage> {
       body: pages[_selectedIndex],
       bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        onItemTapped: _onItemTapped,
         selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Início',
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory_2),
-            label: 'Estoque',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
-            label: 'Relatórios',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_shipping),
-            label: 'Entregas',
-          ),
-        ],
       ),
     );
   }
@@ -133,7 +109,9 @@ class TelaEstoque extends StatelessWidget {
                         Text(
                           '${total.toStringAsFixed(1)} kg',
                           style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -143,8 +121,9 @@ class TelaEstoque extends StatelessWidget {
                       children: estoque.entries.map((entry) {
                         final peixe = entry.key;
                         final quantidade = entry.value;
-                        final corTexto =
-                            quantidade > 0 ? Colors.green : Colors.red;
+                        final corTexto = quantidade > 0
+                            ? Colors.green
+                            : Colors.red;
 
                         return Card(
                           elevation: 3,
@@ -153,18 +132,21 @@ class TelaEstoque extends StatelessWidget {
                             title: Text(
                               peixe,
                               style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             subtitle: Text(
                               'Quantidade: ${quantidade.toStringAsFixed(1)} kg',
-                              style: TextStyle(
-                                  fontSize: 16, color: corTexto),
+                              style: TextStyle(fontSize: 16, color: corTexto),
                             ),
                             trailing: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF1494F6),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 10),
+                                  horizontal: 16,
+                                  vertical: 10,
+                                ),
                               ),
                               onPressed: () async {
                                 final retirada = await Navigator.push(
@@ -193,9 +175,11 @@ class TelaEstoque extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
-                          context, 
-                          CupertinoPageRoute(builder: (context) => UpdatePage())
-                          );
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => UpdatePage(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
@@ -205,13 +189,10 @@ class TelaEstoque extends StatelessWidget {
                       ),
                       child: const Text(
                         '!!!Botão temporário!!!',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white
-                        ),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
-                      ),
-                    )
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -258,8 +239,7 @@ class _TelaRetirarState extends State<TelaRetirar> {
           children: [
             Text(
               'Peixe selecionado: ${widget.peixe}',
-              style:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             TextField(
@@ -270,7 +250,7 @@ class _TelaRetirarState extends State<TelaRetirar> {
               ),
               keyboardType: TextInputType.number,
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
               ],
             ),
             const SizedBox(height: 30),
@@ -280,7 +260,9 @@ class _TelaRetirarState extends State<TelaRetirar> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF1494F6),
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 40, vertical: 16),
+                    horizontal: 40,
+                    vertical: 16,
+                  ),
                 ),
                 child: const Text(
                   'Confirmar Retirada',

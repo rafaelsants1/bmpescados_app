@@ -6,11 +6,13 @@ import 'package:flutter/cupertino.dart';
 class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
   final Function(int) onItemTapped;
+  final Color selectedItemColor;
 
   const CustomBottomNav({
     super.key,
     required this.currentIndex,
     required this.onItemTapped,
+    this.selectedItemColor = Colors.white,
   });
 
   void _navigate(BuildContext context, int index) {

@@ -1,6 +1,9 @@
+import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
+import 'package:bmpescados_app/widgets/bottom_nav.dart';
 
 class NovoPedidoPage extends StatefulWidget {
   const NovoPedidoPage({super.key});
@@ -22,24 +25,26 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
       _selectedIndex = index;
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Aba ${index + 1} selecionada")),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text("Aba ${index + 1} selecionada")));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: 1,
+        onItemTapped: (index) {},
+      ),
+
       backgroundColor: const Color(0xFFE9F2FF),
       appBar: AppBar(
         backgroundColor: const Color(0xFF2196F3),
         automaticallyImplyLeading: false,
         title: const Text(
           "Novo Pedido",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -54,7 +59,10 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
             child: Center(
               child: Text(
                 "Pedido: 103",
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
@@ -74,10 +82,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
               children: [
                 const Text(
                   "Adicionar Pedido",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
 
@@ -95,8 +100,14 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                     ),
                   ),
                   items: const [
-                    DropdownMenuItem(value: "Boutique do Peixe", child: Text("Boutique do Peixe")),
-                    DropdownMenuItem(value: "Pescados do Mar", child: Text("Pescados do Mar")),
+                    DropdownMenuItem(
+                      value: "Boutique do Peixe",
+                      child: Text("Boutique do Peixe"),
+                    ),
+                    DropdownMenuItem(
+                      value: "Pescados do Mar",
+                      child: Text("Pescados do Mar"),
+                    ),
                   ],
                   onChanged: (value) {
                     setState(() => clienteSelecionado = value);
@@ -119,9 +130,18 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                     ),
                   ),
                   items: const [
-                    DropdownMenuItem(value: "Boleto 30 dias", child: Text("Boleto 30 dias")),
-                    DropdownMenuItem(value: "Pix à vista", child: Text("Pix à vista")),
-                    DropdownMenuItem(value: "Cartão crédito", child: Text("Cartão crédito")),
+                    DropdownMenuItem(
+                      value: "Boleto 30 dias",
+                      child: Text("Boleto 30 dias"),
+                    ),
+                    DropdownMenuItem(
+                      value: "Pix à vista",
+                      child: Text("Pix à vista"),
+                    ),
+                    DropdownMenuItem(
+                      value: "Cartão crédito",
+                      child: Text("Cartão crédito"),
+                    ),
                   ],
                   onChanged: (value) {
                     setState(() => pagamentoSelecionado = value);
@@ -145,9 +165,13 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                   ),
                   items: const [
                     DropdownMenuItem(
-                        value: "Rua Aruá, 100 - Centro", child: Text("Rua Aruá, 100 - Centro")),
+                      value: "Rua Aruá, 100 - Centro",
+                      child: Text("Rua Aruá, 100 - Centro"),
+                    ),
                     DropdownMenuItem(
-                        value: "Av. Beira Mar, 240", child: Text("Av. Beira Mar, 240")),
+                      value: "Av. Beira Mar, 240",
+                      child: Text("Av. Beira Mar, 240"),
+                    ),
                   ],
                   onChanged: (value) {
                     setState(() => enderecoSelecionado = value);
@@ -200,22 +224,6 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
             ),
           ),
         ),
-      ),
-
-      // 🔵 BottomNavigationBar personalizado
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF2196F3), // Fundo azul
-        selectedItemColor: Colors.white, // Ícone/texto selecionado em branco
-        unselectedItemColor: Colors.white70, // Ícones não selecionados em branco-claro
-        currentIndex: _selectedIndex,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.inventory_2), label: "Estoque"),
-          BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: "Pedidos"),
-          BottomNavigationBarItem(icon: Icon(Icons.local_shipping), label: "Entregas"),
-        ],
-        onTap: _onItemTapped,
       ),
     );
   }

@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                         // Ação ao clicar
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
+                        CupertinoPageRoute(
                             builder: (context) => NovoPedidoPage(),
                           ),
                         );
@@ -222,24 +222,6 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 const SizedBox(height: 20),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.list_alt,
-                        label: 'Pedidos',
-                        onTap: () {
-                          // Ação ao clicar
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(builder: (context) => NovoPedidoPage()),
-                          );
-                        },
-                      ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),

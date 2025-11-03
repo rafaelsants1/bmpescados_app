@@ -14,9 +14,54 @@ class UpdatePage extends StatefulWidget {
 }
 
 class _UpdatePage extends State<UpdatePage> {
-  bool _obscureText = true;
+  final TextEditingController _quantidadeController = TextEditingController();
+  final TextEditingController _descricaoController = TextEditingController();
+  final TextEditingController _codigoController = TextEditingController();
+
+  String? _tipoProdutoSelecionado;
+
+  final List<String> _tiposDeProduto = [
+    'Tilápia',
+    'Sardinha',
+    'Dourado',
+    'Salmão',
+    'Outros',
+  ];
+
+  void _salvarEstoque() {
+    debugPrint('Tipo de Produto: ${_tipoProdutoSelecionado}');
+    debugPrint('Quantidade: ${_quantidadeController}');
+    debugPrint('Descrição: ${_descricaoController}');
+    debugPrint('Código: ${_codigoController}');
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Dados de estoque salvos (validação)!')),
+    );
+    _quantidadeController.clear();
+    _descricaoController.clear();
+    _codigoController.clear();
+    setState(() {
+      _tipoProdutoSelecionado = null;
+    });
+  }
 
   @override
+  void dispose() {
+    _quantidadeController.dispose();
+    _descricaoController.dispose();
+    _codigoController.dispose();
+    super.dispose();
+  }
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+ @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
@@ -31,7 +76,7 @@ class _UpdatePage extends State<UpdatePage> {
               alignment: Alignment.center,
               children: [
                 const Text(
-                  'Estoque',
+                  'Adicionar ao estoque', // Título da tela
                   style: TextStyle(
                     fontSize: 26,
                     color: Colors.white,
@@ -47,15 +92,16 @@ class _UpdatePage extends State<UpdatePage> {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                        if (Navigator.of(context).canPop()) {
-                          Navigator.of(context).pop();
-                        }
+                      if (Navigator.of(context).canPop()) {
+                        Navigator.of(context).pop();
+                      }
                     },
                   ),
                 ),
               ],
             ),
           ),
+          
           Expanded(
             child: Container(
               width: double.infinity,
@@ -64,20 +110,120 @@ class _UpdatePage extends State<UpdatePage> {
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
-              child: Column(
-                children:  [
-                  const Text(
-                    'Adicionar ao Estoque',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Título "Adicionar ao estoque"
+                    const Text(
+                      'Adicionar ao estoque',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+
+                    // Campo "Tipo de produto" (Dropdown)
+                    DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'Tipo de produto',
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      ),
+                      value: _tipoProdutoSelecionado,
+                      hint: const Text('Selecione'),
+                      items: _tiposDeProduto.map((String tipo) {
+                        return DropdownMenuItem<String>(
+                          value: tipo,
+                          child: Text(tipo),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _tipoProdutoSelecionado = newValue;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Campo "Quantidade (Kg)"
+                    TextField(
+                      controller: _quantidadeController,
+                      decoration: const InputDecoration(
+                        labelText: 'Quantidade',
+                        suffixText: 'Kg',
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8), 
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Campo "Descrição" (Multiline TextField)
+                    TextField(
+                      controller: _descricaoController,
+                      decoration: const InputDecoration(
+                        labelText: 'Descrição',
+                        border: OutlineInputBorder(),
+                        alignLabelWithHint: true,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      ),
+                      maxLines: 4, // Permite múltiplas linhas
+                      keyboardType: TextInputType.multiline,
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Campo "Código" com ícone de scanner
+                    TextField(
+                      controller: _codigoController,
+                      decoration: InputDecoration(
+                        labelText: 'Código',
+                        border: const OutlineInputBorder(),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.qr_code_scanner, size: 28, color: Color(0xFF1494F6)),
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Abrir scanner de código! (validação)')),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+
+                    // Botão "Salvar"
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: _salvarEstoque,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF1494F6),
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text(
+                          'Salvar',
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }

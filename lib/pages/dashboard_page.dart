@@ -1,3 +1,4 @@
+import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,8 +7,7 @@ import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage ({super.key});
-
+  const HomePage({super.key});
 
   List<double> get sampleLineData => [0, 2500, 6000, 4000, 9000, 7500];
   List<double> get samplePieData => [20, 15, 10, 25, 8, 12, 10];
@@ -19,16 +19,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _obscureText = true;
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Scaffold( 
+    return Scaffold(
       backgroundColor: const Color(0xFF1494F6),
       appBar: AppBar(
         backgroundColor: const Color(0xFF1494F6),
         elevation: 0,
-        title: const Text('Dashboard', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36)),
+        title: const Text(
+          'Dashboard',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 36,
+          ),
+        ),
         centerTitle: true,
         leading: PopupMenuButton<String>(
           color: const Color(0xFFFFFFFF),
@@ -37,12 +44,12 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(12),
           ),
           onSelected: (value) {
-            switch(value) {
+            switch (value) {
               case 'configuraçoes':
-              // ação para config
+                // ação para config
                 break;
               case 'suporte':
-              // ação para suporte
+                // ação para suporte
                 break;
               case 'sair':
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -50,20 +57,20 @@ class _HomePageState extends State<HomePage> {
                     backgroundColor: Colors.white,
                     content: Text(
                       style: TextStyle(color: Colors.black54),
-                      'Saindo da conta...'
-                      ),
-                    duration: Duration(seconds: 2),
+                      'Saindo da conta...',
                     ),
+                    duration: Duration(seconds: 2),
+                  ),
                 );
-                Future.delayed(const Duration(seconds:2), () {
+                Future.delayed(const Duration(seconds: 2), () {
                   Navigator.push(
                     context,
                     CupertinoPageRoute(builder: (context) => LoginPage()),
                   );
                 });
                 break;
-              }
-            },
+            }
+          },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             const PopupMenuItem<String>(
               value: 'configuracoes',
@@ -73,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(width: 10),
                   Text(
                     style: TextStyle(color: const Color(0xFF1494F6)),
-                    'Configurações'
+                    'Configurações',
                   ),
                 ],
               ),
@@ -87,8 +94,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(width: 10),
                   Text(
                     style: TextStyle(color: const Color(0xFF1494F6)),
-                    'Suporte'
-                    ),
+                    'Suporte',
+                  ),
                 ],
               ),
             ),
@@ -101,10 +108,10 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(width: 10),
                   Text(
                     style: TextStyle(color: const Color(0xFF1494F6)),
-                    'Sair'
-                    ),
+                    'Sair',
+                  ),
                 ],
-              )
+              ),
             ),
           ],
         ),
@@ -114,95 +121,109 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: size.width * 0.35,
-                      height: size.width * 0.30,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text('Olá,', style: TextStyle(color: Colors.white, fontSize: 28)),
-                          SizedBox(height: 4),
-                          Text('Altemir!', style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: size.width * 0.35,
+                    height: size.width * 0.30,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Olá,',
+                          style: TextStyle(color: Colors.white, fontSize: 28),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Altemir!',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 34,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    // Card de Produção
-                    DashboardButton(
-                      icon: Icons.trending_up, 
-                      label: 'Produção',
+                  ),
+                  // Card de Produção
+                  DashboardButton(
+                    icon: Icons.trending_up,
+                    label: 'Produção',
+                    onTap: () {
+                      // Ação ao clicar
+                    },
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: DashboardButton(
+                      icon: Icons.list_alt,
+                      label: 'Pedidos',
+                      onTap: () {
+                        // Ação ao clicar
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NovoPedidoPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: DashboardButton(
+                      icon: Icons.inventory,
+                      label: 'Estoque',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => RetiradaPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: DashboardButton(
+                      icon: Icons.local_shipping,
+                      label: 'Entregas',
                       onTap: () {
                         // Ação ao clicar
                       },
                     ),
-                  ],
-                ),
-
-                const SizedBox(height: 20),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.list_alt,
-                        label: 'Pedidos',
-                        onTap: () {
-                          // Ação ao clicar
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => IncluirItensPage()),
-                          );
-                        },
-                      ), 
+                  ),
+                  Expanded(
+                    child: DashboardButton(
+                      icon: Icons.article,
+                      label: 'Relatórios',
+                      onTap: () {
+                        // Ação ao clicar
+                      },
                     ),
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.inventory,
-                        label: 'Estoque',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(builder: (context) => RetiradaPage()),
-                  );
-                        },
-                      ), 
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 20),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.local_shipping,
-                        label: 'Entregas',
-                        onTap: () {
-                          // Ação ao clicar
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.article, 
-                        label: 'Relatórios',
-                        onTap: (){
-                          // Ação ao clicar
-                        },
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:bmpescados_app/widgets/bottom_nav.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,19 +12,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PrincipalPage(),
+      home: RetiradaPage(),
     );
   }
 }
 
-class PrincipalPage extends StatefulWidget {
-  const PrincipalPage({super.key});
+class RetiradaPage extends StatefulWidget {
+  const RetiradaPage({super.key});
 
   @override
-  State<PrincipalPage> createState() => _PrincipalPageState();
+  State<RetiradaPage> createState() => _RetiradaPageState();
 }
 
-class _PrincipalPageState extends State<PrincipalPage> {
+class _RetiradaPageState extends State<RetiradaPage> {
   int _selectedIndex = 1;
 
   final Map<String, double> estoque = {
@@ -57,30 +59,12 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
     return Scaffold(
       body: pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Início',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory_2),
-            label: 'Estoque',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
-            label: 'Relatórios',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_shipping),
-            label: 'Entregas',
-          ),
-        ],
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: 1,
+        onItemTapped: (index) {
+          
+        },
+        
       ),
     );
   }

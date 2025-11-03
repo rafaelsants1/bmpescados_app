@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                           // Ação ao clicar
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => IncluirItensPage()),
+                            CupertinoPageRoute(builder: (context) => IncluirItensPage()),
                           );
                         },
                       ), 

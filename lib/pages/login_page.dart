@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -112,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context, 
-                            MaterialPageRoute(builder: (_) => const HomePage()),
+                            CupertinoPageRoute(builder: (_) => const HomePage()),
                             );
                         },
                         style: ElevatedButton.styleFrom(

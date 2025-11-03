@@ -13,8 +13,98 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
   String selectedOptionDropDown = 'Buscar Produto';
   String hoveredOption = '';
 
+  final List<Map<String, dynamic>> produtos = [
+    {
+      'nome': 'Pescada Amarela Inteiro cong.',
+      'preco': 89.90,
+      'estoque': 500,
+      'unidade': 'kg',
+      'categoria': 'Peixe Inteiro',
+      'imagem':
+          'https://www.centralfishes.com.br/varejo/wp-content/uploads/2024/07/PESCADA-AMARELA.webp',
+    },
+    {
+      'nome': 'Pescada Branca Inteiro cong.',
+      'preco': 79.90,
+      'estoque': 300,
+      'unidade': 'kg',
+      'categoria': 'Peixe Inteiro',
+      'imagem':
+          'https://kipeixe.com.br/media/catalog/product/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/d/7/d783e009-d9f2-417b-8bbb-9094e603a2e7.jpg',
+    },
+    {
+      'nome': 'Tilápia Inteiro cong.',
+      'preco': 39.90,
+      'estoque': 80,
+      'unidade': 'kg',
+      'categoria': 'Peixe Inteiro',
+      'imagem':
+          'https://engepesca.com.br/uploads/imagens/800x600_tilapia-pesquisadores-descobrem-na-composicao-creatina-taurina-e-glutamato-249-7424.jpg',
+    },
+    {
+      'nome': 'Filé de Tilápia cong.',
+      'preco': 59.90,
+      'estoque': 200,
+      'unidade': 'kg',
+      'categoria': 'Peixe em Filé',
+      'imagem':
+          'https://mercado.marechalalimentos.com.br/122-large_default/file-de-tilapia-congelado-700g.jpg',
+    },
+    {
+      'nome': 'Posta de Dourado cong.',
+      'preco': 64.90,
+      'estoque': 150,
+      'unidade': 'kg',
+      'categoria': 'Peixe em Posta',
+      'imagem':
+          'https://armazemdopeixe.com/wp-content/uploads/2021/05/DOURADO-DO-MAR-EM-POSTAS.png',
+    },
+  ];
+
+  late List<int> quantidades;
+  double totalPedido = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    quantidades = List.filled(produtos.length, 0);
+  }
+
+  void _atualizarTotal() {
+    double novoTotal = 0;
+    for (int i = 0; i < produtos.length; i++) {
+      novoTotal += quantidades[i] * produtos[i]['preco'];
+    }
+    setState(() {
+      totalPedido = novoTotal;
+    });
+  }
+
+  void _incrementar(int index) {
+    setState(() {
+      quantidades[index]++;
+    });
+    _atualizarTotal();
+  }
+
+  void _decrementar(int index) {
+    if (quantidades[index] > 0) {
+      setState(() {
+        quantidades[index]--;
+      });
+      _atualizarTotal();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final produtosFiltrados = produtos
+        .asMap()
+        .entries
+        .where((e) => e.value['categoria'] == selectedOption)
+        .map((e) => {...e.value, 'index': e.key})
+        .toList();
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -39,8 +129,8 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
                   const SnackBar(
                     backgroundColor: Colors.white,
                     content: Text(
-                      style: TextStyle(color: Colors.black54),
                       'Saindo da conta...',
+                      style: TextStyle(color: Colors.black54),
                     ),
                     duration: Duration(seconds: 2),
                   ),
@@ -67,136 +157,110 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          // Opções Horizontal
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            color: const Color(0xFF189CFF),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  _buildSelectableOption('Peixe Inteiro'),
-                  _buildSelectableOption('Peixe em Posta'),
-                  _buildSelectableOption('Peixe em Filé'),
-                  _buildSelectableOption('Peixe Empanado'),
-                  _buildSelectableOption('Peixe Fatiado'),
-                ],
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  'Cliente: Boutique do Peixe',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
-                ),
-                Text(
-                  'Pedido: 103',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Dropdown Produtos
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 50.0,
-              vertical: 8.0,
-            ),
-            child: Center(
-              child: Container(
-                height: 45,
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey.shade400),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: selectedOptionDropDown,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    isExpanded: true,
-                    style: const TextStyle(color: Colors.black, fontSize: 16),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedOptionDropDown = newValue!;
-                      });
-                    },
-                    items: [
-                      DropdownMenuItem(
-                        value: 'Buscar Produto',
-                        child: const Text(
-                          'Buscar produto',
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                      ),
-                      _buildProductItem(
-                        nome: 'Sardinha pct. 800g',
-                        estoque: 200,
-                      ),
-                      _buildProductItem(
-                        nome: 'Filé de pescada Amarela',
-                        estoque: 30,
-                      ),
-                      _buildProductItem(nome: 'Salmão pct. 800g', estoque: 20),
-                      _buildProductItem(nome: 'Salmão pct. 400g', estoque: 100),
+          Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                color: const Color(0xFF189CFF),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _buildSelectableOption('Peixe Inteiro'),
+                      _buildSelectableOption('Peixe em Posta'),
+                      _buildSelectableOption('Peixe em Filé'),
+                      _buildSelectableOption('Peixe Empanado'),
+                      _buildSelectableOption('Peixe Fatiado'),
                     ],
                   ),
                 ),
               ),
-            ),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                  child: produtosFiltrados.isNotEmpty
+                      ? Column(
+                          children: produtosFiltrados.map((entry) {
+                            final p = entry;
+                            final index = p['index'];
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: _buildProductCard(
+                                index: index,
+                                nome: p['nome'],
+                                preco: p['preco'],
+                                estoque: p['estoque'],
+                                unidade: p['unidade'],
+                                imagem: p['imagem'],
+                              ),
+                            );
+                          }).toList(),
+                        )
+                      : const Center(
+                          child: Text(
+                            'Nenhum produto encontrado nesta categoria.',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                ),
+              ),
+              const SizedBox(height: 70),
+            ],
           ),
 
-          // Cards Produtos
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Column(
-                children: [
-                  _buildProductCard(
-                    nome: 'Pescada Amarela Inteiro cong.',
-                    preco: 89.90,
-                    estoque: 500,
-                    unidade: 'kg',
-                    imagem: 'https://www.centralfishes.com.br/varejo/wp-content/uploads/2024/07/PESCADA-AMARELA.webp',
+          // 🔹 Botão fixo com total
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  // Navegar para tela de resumo
+                },
+                child: Container(
+                  width: 280,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF189CFF),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 6,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 12),
-                  _buildProductCard(
-                    nome: 'Pescada Branca Inteiro cong.',
-                    preco: 79.90,
-                    estoque: 300,
-                    unidade: 'kg',
-                    imagem: 'https://kipeixe.com.br/media/catalog/product/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/d/7/d783e009-d9f2-417b-8bbb-9094e603a2e7.jpg',
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Total do Pedido: ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'R\$ ${totalPedido.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 12),
-                  _buildProductCard(
-                    nome: 'Tilápia Inteiro cong.',
-                    preco: 39.90,
-                    estoque: 80,
-                    unidade: 'kg',
-                    imagem: 'https://engepesca.com.br/uploads/imagens/800x600_tilapia-pesquisadores-descobrem-na-composicao-creatina-taurina-e-glutamato-249-7424.jpg',
-                  ),
-                ],
+                ),
               ),
             ),
           ),
@@ -205,32 +269,9 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
     );
   }
 
-  DropdownMenuItem<String> _buildProductItem({
-    required String nome,
-    required int estoque,
-  }) {
-    Color corEstoque = estoque >= 50 ? Colors.green : Colors.red;
-
-    return DropdownMenuItem<String>(
-      value: nome,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(child: Text(nome, style: const TextStyle(fontSize: 16))),
-          Text(
-            '($estoque un.)',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: corEstoque,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
+  // --- COMPONENTES ---
   Widget _buildProductCard({
+    required int index,
     required String nome,
     required double preco,
     required int estoque,
@@ -238,6 +279,7 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
     required String imagem,
   }) {
     Color corEstoque = estoque >= 100 ? Colors.green : Colors.red;
+    double subtotal = quantidades[index] * preco;
 
     return Container(
       decoration: BoxDecoration(
@@ -273,10 +315,9 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Sub-Total:', style: TextStyle(fontSize: 15)),
-                const SizedBox(width: 4),
+                const Text('Sub-Total: ', style: TextStyle(fontSize: 15)),
                 Text(
-                  'R\$ 0',
+                  'R\$ ${subtotal.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -289,14 +330,17 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _qtyButton(Icons.remove),
+                _qtyButton(Icons.remove, () => _decrementar(index)),
                 const SizedBox(width: 12),
-                const Text(
-                  '0',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Text(
+                  '${quantidades[index]}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(width: 12),
-                _qtyButton(Icons.add),
+                _qtyButton(Icons.add, () => _incrementar(index)),
               ],
             ),
             const SizedBox(height: 10),
@@ -314,57 +358,43 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
     );
   }
 
-  Widget _qtyButton(IconData icon) {
-    return Container(
-      width: 36,
-      height: 36,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(color: Colors.grey.shade400),
+  Widget _qtyButton(IconData icon, VoidCallback onPressed) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(color: Colors.grey.shade400),
+        ),
+        child: Icon(icon, size: 22),
       ),
-      child: Icon(icon, size: 22),
     );
   }
 
   Widget _buildSelectableOption(String label) {
-    return MouseRegion(
-      onEnter: (_) {
+    final bool ativo = selectedOption == label;
+    return GestureDetector(
+      onTap: () {
         setState(() {
-          hoveredOption = label;
+          selectedOption = label;
         });
       },
-      onExit: (_) {
-        setState(() {
-          hoveredOption = '';
-        });
-      },
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedOption = label;
-          });
-        },
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 7),
-          decoration: BoxDecoration(
-            color: selectedOption == label
-                ? const Color(0xFF189CFF)
-                : hoveredOption == label
-                ? Colors.white
-                : const Color(0xFF189CFF),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white),
-          ),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: selectedOption == label
-                  ? FontWeight.bold
-                  : FontWeight.normal,
-              fontSize: 16,
-            ),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+        decoration: BoxDecoration(
+          color: ativo ? Colors.white : const Color(0xFF189CFF),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.white),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: ativo ? const Color(0xFF189CFF) : Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

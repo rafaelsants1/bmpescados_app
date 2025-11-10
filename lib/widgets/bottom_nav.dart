@@ -1,5 +1,6 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/retirada_page.dart';
+import 'package:bmpescados_app/pages/relatorios_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 

@@ -2,6 +2,7 @@ import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/retirada_page.dart';
+import 'package:bmpescados_app/pages/relatorios_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
 
@@ -193,7 +194,10 @@ class _HomePageState extends State<HomePage> {
                         icon: Icons.article, 
                         label: 'Relatórios',
                         onTap: (){
-                          // Ação ao clicar
+                          Navigator.pushReplacement(
+                            context, 
+                            CupertinoPageRoute(builder: (context) => const RelatoriosPage())
+                          );
                         },
                       ),
                     ),

@@ -46,13 +46,45 @@ class _AcompanhamentoEntregaPageState extends State<AcompanhamentoEntregaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Acompanhamento de Entrega')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: const IconThemeData(color: Colors.white),
+        leading: IconButton(
+          padding: const EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          },
+        ),
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+        ),
+        centerTitle: true,
+        title: const Text('Novo pedido'),
+        backgroundColor: const Color(0xFF189CFF),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child: IconButton(
+              //     padding: const EdgeInsets.only(left: 32),
+              //     icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+              //     onPressed: () {
+              //       if (Navigator.of(context).canPop()) {
+              //         Navigator.of(context).pop();
+              //       }
+              //     },
+              //   ),
+              // ),
               TextFormField(
                 controller: codigoController,
                 decoration: const InputDecoration(
@@ -91,7 +123,7 @@ class _AcompanhamentoEntregaPageState extends State<AcompanhamentoEntregaPage> {
               ElevatedButton(
                 onPressed: _acompanharEntrega,
                 child: const Text('Atualizar Entrega'),
-              ), 
+              ),
             ],
           ),
         ),

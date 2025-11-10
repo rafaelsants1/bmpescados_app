@@ -47,32 +47,7 @@ class _RetiradaPageState extends State<RetiradaPage> {
 
     return Scaffold(
       body: pages[_selectedIndex],
-      bottomNavigationBar: CustomBottomNav(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Início',
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory_2),
-            label: 'Estoque',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
-            label: 'Relatórios',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_shipping),
-            label: 'Entregas',
-          ),
-        ],
-      ),
+    
     );
   }
 }
@@ -92,7 +67,7 @@ class TelaEstoque extends StatelessWidget {
     final total = estoque.values.fold(0.0, (a, b) => a + b);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1494F6), // fundo azul superior
+      backgroundColor: const Color(0xFF1494F6), 
       body: Column(
         children: [
           SizedBox(

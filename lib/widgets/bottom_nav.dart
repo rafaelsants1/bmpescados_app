@@ -1,6 +1,10 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/retirada_page.dart';
+<<<<<<< HEAD
 import 'package:bmpescados_app/pages/relatorios_page.dart';
+=======
+import 'package:bmpescados_app/pages/novo_pedido_page.dart';
+>>>>>>> 51f7fc5ad17ea37e7e7c6c29137480389cf53ea3
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -20,18 +24,21 @@ class CustomBottomNav extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.pop(
-          context, 
-          CupertinoPageRoute(builder: (context) => const HomePage())
-          );
-          break;
+          context,
+          CupertinoPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
 
       case 1:
         Navigator.pushReplacement(
-          context, 
-          MaterialPageRoute(builder: (context) => const RetiradaPage())
-          );
+          context,
+          MaterialPageRoute(builder: (context) => const RetiradaPage()),
+        );
       case 2:
-        // PedidosPage()
+        Navigator.pushReplacement(
+          context,
+          CupertinoPageRoute(builder: (context) => const NovoPedidoPage()),
+        );
         break;
       case 3:
         // EntregasPage()
@@ -53,23 +60,17 @@ class CustomBottomNav extends StatelessWidget {
       elevation: 10,
       backgroundColor: const Color(0xFF1494F6),
       items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Início',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory_2),
-            label: 'Estoque',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
-            label: 'Pedidos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_shipping),
-            label: 'Entregas',
-          ),
+          icon: Icon(Icons.inventory_2),
+          label: 'Estoque',
+        ),
+        BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Pedidos'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.local_shipping),
+          label: 'Entregas',
+        ),
       ],
-      );
+    );
   }
 }

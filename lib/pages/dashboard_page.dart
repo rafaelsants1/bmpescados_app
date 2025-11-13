@@ -1,9 +1,11 @@
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
-import 'package:bmpescados_app/pages/incluir_itens_page.dart';
+import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
+import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:bmpescados_app/pages/retirada_page.dart';
+import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/pages/relatorios_page.dart';
+import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
 
@@ -18,6 +20,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   bool _obscureText = true;
 
   @override
@@ -28,16 +40,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: const Color(0xFF1494F6),
       appBar: AppBar(
         backgroundColor: const Color(0xFF1494F6),
-        elevation: 0,
-        title: const Text(
-          'Dashboard',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 36,
-          ),
-        ),
-        centerTitle: true,
         leading: PopupMenuButton<String>(
           color: const Color(0xFFFFFFFF),
           icon: const Icon(color: Colors.white, Icons.more_horiz),
@@ -173,8 +175,8 @@ class _HomePageState extends State<HomePage> {
                         // Ação ao clicar
                         Navigator.push(
                           context,
-                        CupertinoPageRoute(
-                            builder: (context) => NovoPedidoPage(),
+                          CupertinoPageRoute(
+                            builder: (context) => IncluirItensPage(),
                           ),
                         );
                       },
@@ -206,7 +208,12 @@ class _HomePageState extends State<HomePage> {
                       icon: Icons.local_shipping,
                       label: 'Entregas',
                       onTap: () {
-                        // Ação ao clicar
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const AcompanhamentoEntregaPage()
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -215,80 +222,26 @@ class _HomePageState extends State<HomePage> {
                       icon: Icons.article,
                       label: 'Relatórios',
                       onTap: () {
-                        // Ação ao clicar
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const RelatoriosPage(),
+                          ),
+                        );
                       },
                     ),
                   ),
-                  ],
-                ),
-
-                const SizedBox(height: 20),
-<<<<<<< HEAD
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.list_alt,
-                        label: 'Pedidos',
-                        onTap: () {
-                          // Ação ao clicar
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(builder: (context) => IncluirItensPage()),
-                          );
-                        },
-                      ), 
-                    ),
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.inventory,
-                        label: 'Estoque',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(builder: (context) => RetiradaPage()),
-                  );
-                        },
-                      ), 
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 20),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.local_shipping,
-                        label: 'Entregas',
-                        onTap: () {
-                          // Ação ao clicar
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: DashboardButton(
-                        icon: Icons.article, 
-                        label: 'Relatórios',
-                        onTap: (){
-                          Navigator.pushReplacement(
-                            context, 
-                            CupertinoPageRoute(builder: (context) => const RelatoriosPage())
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-=======
+                ],
+              ),
+              const SizedBox(height: 20),
             ],
->>>>>>> 51f7fc5ad17ea37e7e7c6c29137480389cf53ea3
           ),
         ),
+      ),
+
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: 0,
+        onItemTapped: _onItemTapped,
       ),
     );
   }

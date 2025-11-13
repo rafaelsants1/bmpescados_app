@@ -1,10 +1,9 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
-import 'package:bmpescados_app/pages/retirada_page.dart';
-<<<<<<< HEAD
+import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
+import 'package:bmpescados_app/pages/pedidos_page.dart';
+import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/pages/relatorios_page.dart';
-=======
-import 'package:bmpescados_app/pages/novo_pedido_page.dart';
->>>>>>> 51f7fc5ad17ea37e7e7c6c29137480389cf53ea3
+import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -23,9 +22,9 @@ class CustomBottomNav extends StatelessWidget {
   void _navigate(BuildContext context, int index) {
     switch (index) {
       case 0:
-        Navigator.pop(
+        Navigator.pushReplacement(
           context,
-          CupertinoPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
 
@@ -37,11 +36,14 @@ class CustomBottomNav extends StatelessWidget {
       case 2:
         Navigator.pushReplacement(
           context,
-          CupertinoPageRoute(builder: (context) => const NovoPedidoPage()),
+          MaterialPageRoute(builder: (context) => const IncluirItensPage()),
         );
         break;
       case 3:
-        // EntregasPage()
+        Navigator.pushReplacement(
+          context, 
+          MaterialPageRoute(builder: (context) => const AcompanhamentoEntregaPage())
+          );
         break;
     }
   }
@@ -61,15 +63,9 @@ class CustomBottomNav extends StatelessWidget {
       backgroundColor: const Color(0xFF1494F6),
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.inventory_2),
-          label: 'Estoque',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.inventory_2), label: 'Estoque',),
         BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Pedidos'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.local_shipping),
-          label: 'Entregas',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.local_shipping),label: 'Entregas',),
       ],
     );
   }

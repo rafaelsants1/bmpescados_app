@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
-import 'package:bmpescados_app/widgets/bottom_nav.dart'; 
+import 'package:bmpescados_app/widgets/bottom_nav.dart';
 
 class RelatoriosPage extends StatefulWidget {
   const RelatoriosPage({super.key});
@@ -11,7 +11,7 @@ class RelatoriosPage extends StatefulWidget {
 }
 
 class _RelatoriosPageState extends State<RelatoriosPage> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
 
   final List<String> _reportTitles = [
     'Desempenho de entregas',
@@ -32,8 +32,8 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1494F6), 
-      
+      backgroundColor: const Color(0xFF1494F6),
+
       body: Column(
         children: [
           SizedBox(
@@ -54,16 +54,11 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     padding: const EdgeInsets.only(left: 32),
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                     onPressed: () {
-                      _onItemTapped(0);
-                      Navigator.pushReplacement(
-                        context, 
-                        CupertinoPageRoute(builder: (context) => const HomePage())
-                        );
+                      if (Navigator.of(context).canPop()) {
+                        Navigator.of(context).pop();
+                      }
                     },
                   ),
                 ),
@@ -113,7 +108,7 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
       ),
 
       bottomNavigationBar: CustomBottomNav(
-        currentIndex: _selectedIndex,
+        currentIndex: 0,
         onItemTapped: _onItemTapped,
       ),
     );
@@ -124,10 +119,7 @@ class _ReportListItem extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  const _ReportListItem({
-    required this.title,
-    required this.onTap,
-  });
+  const _ReportListItem({required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +153,7 @@ class _ReportListItem extends StatelessWidget {
                   color: Colors.black87,
                 ),
               ),
-              
+
               Row(
                 children: [
                   Text(

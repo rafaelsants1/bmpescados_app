@@ -1,6 +1,6 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
-import 'package:bmpescados_app/pages/retirada_page.dart';
+import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -222,7 +222,7 @@ class _UpdatePage extends State<UpdatePage> {
         ],
       ),
       bottomNavigationBar: CustomBottomNav(
-        currentIndex: _selectedIndex,
+        currentIndex: 1,
         onItemTapped: _onItemTapped,
       ),
     );

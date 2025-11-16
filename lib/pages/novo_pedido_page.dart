@@ -18,11 +18,11 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
   String? enderecoSelecionado = "Rua Aruá, 100 - Centro";
   bool emergencial = false;
 
-  int _selectedIndex = 2; // índice padrão (ex: "Pedidos")
+  int selectedIndex = 2; // índice padrão (ex: "Pedidos")
 
-  void _onItemTapped(int index) {
+  void onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
 
     ScaffoldMessenger.of(
@@ -34,9 +34,9 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomBottomNav(
-        currentIndex: 1,
-        onItemTapped: (index) {},
-      ),
+  currentIndex: 2, // ← 0=Home, 1=Estoque, 2=Pedidos, 3=Entregas
+  onItemTapped: (index) {},
+),
 
       backgroundColor: const Color(0xFFE9F2FF),
       appBar: AppBar(
@@ -117,38 +117,38 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                 const SizedBox(height: 20),
 
                 // Forma de Pagamento
-                const Text("Forma de Pagamento"),
-                const SizedBox(height: 6),
-                DropdownButtonFormField<String>(
-                  value: pagamentoSelecionado,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[100],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  items: const [
-                    DropdownMenuItem(
-                      value: "Boleto 30 dias",
-                      child: Text("Boleto 30 dias"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Pix à vista",
-                      child: Text("Pix à vista"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Cartão crédito",
-                      child: Text("Cartão crédito"),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() => pagamentoSelecionado = value);
-                  },
-                ),
+                //const Text("Forma de Pagamento"),
+                //const SizedBox(height: 6),
+                //DropdownButtonFormField<String>(
+                //  value: pagamentoSelecionado,
+                //decoration: InputDecoration(
+                //    filled: true,
+                  //  fillColor: Colors.grey[100],
+                    //border: OutlineInputBorder(
+                      //borderRadius: BorderRadius.circular(8),
+                      //borderSide: BorderSide.none,
+                    //),
+                  //),
+                  //items: const [
+                    //DropdownMenuItem(
+                      //value: "Boleto 30 dias",
+                      //child: Text("Boleto 30 dias"),
+                    //),
+                    //DropdownMenuItem(
+                      //value: "Pix à vista",
+                      //child: Text("Pix à vista"),
+                    //),
+                    //DropdownMenuItem(
+                     // value: "Cartão crédito",
+                      //child: Text("Cartão crédito"),
+                    //),
+                  //],
+                  //onChanged: (value) {
+                    //setState(() => pagamentoSelecionado = value);
+                  //},
+                //),
 
-                const SizedBox(height: 20),
+                //const SizedBox(height: 20),
 
                 // Endereço
                 const Text("Endereço"),

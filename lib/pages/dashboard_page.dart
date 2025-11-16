@@ -1,3 +1,4 @@
+import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
@@ -172,8 +173,8 @@ class _HomePageState extends State<HomePage> {
                         // Ação ao clicar
                         Navigator.push(
                           context,
-                        CupertinoPageRoute(
-                            builder: (context) => NovoPedidoPage(),
+                          CupertinoPageRoute(
+                            builder: (context) => PedidosPage(),
                           ),
                         );
                       },
@@ -218,10 +219,10 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-                  ],
-                ),
+                ],
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

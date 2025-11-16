@@ -34,7 +34,7 @@ class _RetiradaPageState extends State<RetiradaPage> {
     'Dourado': 84.0,
   };
 
-  void _onItemTapped(int index) {
+  void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });

@@ -5,7 +5,7 @@ import 'package:bmpescados_app/pages/updatestock_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 
 class IncluirItensPage extends StatefulWidget {
   const IncluirItensPage({super.key});

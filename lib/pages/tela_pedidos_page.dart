@@ -2,6 +2,7 @@ import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/detalhes_pedido_page.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
+import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
@@ -246,7 +247,7 @@ class _PedidosPageState extends State<PedidosPage> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const RetiradaPage()),
+            MaterialPageRoute(builder: (_) => const NovoPedidoPage()),
           );
         },
         child: SizedBox(

@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
+import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 
 
-class NovoPedidoPage extends StatefulWidget {
-  const NovoPedidoPage({super.key});
+class CompraPage extends StatefulWidget {
+  const CompraPage({super.key});
 
   @override
-  State<NovoPedidoPage> createState() => _NovoPedidoPageState();
+  State<CompraPage> createState() => _CompraPageState();
 }
 
-class _NovoPedidoPageState extends State<NovoPedidoPage> {
+class _CompraPageState extends State<CompraPage> {
   String? clienteSelecionado = "Boutique do Peixe";
   String? pagamentoSelecionado = "Boleto 30 dias";
   String? enderecoSelecionado = "Rua Aruá, 100 - Centro";
@@ -75,7 +76,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
         backgroundColor: const Color(0xFF2196F3),
         automaticallyImplyLeading: false,
         title: const Text(
-          "Novo Pedido",
+          "Nova Compra",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -88,7 +89,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
             padding: EdgeInsets.only(right: 16),
             child: Center(
               child: Text(
-                "Pedido: 103",
+                "Ordem de compra: 001",
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
             ),
@@ -106,7 +107,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Adicionar Pedido",
+                  "Adicionar Compra",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
@@ -117,23 +118,11 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                   items: ["Boutique do Peixe", "Pescados do Mar"],
                   onChanged: (val) => setState(() => clienteSelecionado = val),
                 ),
-               // _buildDropdown(
-                 // label: "Forma de Pagamento",
-                 // value: pagamentoSelecionado,
-                  //items: ["Boleto 30 dias", "Pix à vista", "Cartão crédito"],
-                  //onChanged: (val) => setState(() => pagamentoSelecionado = val),
-                //),
                 _buildDropdown(
                   label: "Endereço",
                   value: enderecoSelecionado,
                   items: ["Rua Aruá, 100 - Centro", "Av. Beira Mar, 240"],
                   onChanged: (val) => setState(() => enderecoSelecionado = val),
-                ),
-
-                _buildCheckbox(
-                  label: "Emergencial",
-                  value: emergencial,
-                  onChanged: (val) => setState(() => emergencial = val ?? false),
                 ),
                 const SizedBox(height: 30),
 

@@ -1,7 +1,7 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/detalhes_pedido_page.dart';
-import 'package:bmpescados_app/pages/retirada_page.dart';
+import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';

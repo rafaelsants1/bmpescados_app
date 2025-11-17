@@ -2,8 +2,9 @@ import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:bmpescados_app/pages/incluir_itens_page.dart';
+import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
+
 
 class NovoPedidoPage extends StatefulWidget {
   const NovoPedidoPage({super.key});
@@ -18,26 +19,57 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
   String? enderecoSelecionado = "Rua Aruá, 100 - Centro";
   bool emergencial = false;
 
-  int selectedIndex = 2; // índice padrão (ex: "Pedidos")
+  int _selectedIndex = 2;
 
-  void onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
+  void _onItemTapped(int index) {
+    setState(() => _selectedIndex = index);
+  }
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Aba ${index + 1} selecionada")));
+  Widget _buildDropdown({
+    required String label,
+    required String? value,
+    required List<String> items,
+    required ValueChanged<String?> onChanged,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label),
+        const SizedBox(height: 6),
+        DropdownButtonFormField<String>(
+          value: value,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide.none,
+            ),
+          ),
+          items: items.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
+          onChanged: onChanged,
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildCheckbox({
+    required String label,
+    required bool value,
+    required ValueChanged<bool?> onChanged,
+  }) {
+    return Row(
+      children: [
+        Checkbox(value: value, onChanged: onChanged),
+        Text(label),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomNav(
-  currentIndex: 2, // ← 0=Home, 1=Estoque, 2=Pedidos, 3=Entregas
-  onItemTapped: (index) {},
-),
-
       backgroundColor: const Color(0xFFE9F2FF),
       appBar: AppBar(
         backgroundColor: const Color(0xFF2196F3),
@@ -49,9 +81,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         actions: const [
           Padding(
@@ -59,10 +89,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
             child: Center(
               child: Text(
                 "Pedido: 103",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -72,9 +99,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
         padding: const EdgeInsets.all(16),
         child: Card(
           elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -86,132 +111,44 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                 ),
                 const SizedBox(height: 20),
 
-                // Cliente
-                const Text("Cliente"),
-                const SizedBox(height: 6),
-                DropdownButtonFormField<String>(
+                _buildDropdown(
+                  label: "Cliente",
                   value: clienteSelecionado,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[100],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  items: const [
-                    DropdownMenuItem(
-                      value: "Boutique do Peixe",
-                      child: Text("Boutique do Peixe"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Pescados do Mar",
-                      child: Text("Pescados do Mar"),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() => clienteSelecionado = value);
-                  },
+                  items: ["Boutique do Peixe", "Pescados do Mar"],
+                  onChanged: (val) => setState(() => clienteSelecionado = val),
                 ),
-
-                const SizedBox(height: 20),
-
-                // Forma de Pagamento
-                //const Text("Forma de Pagamento"),
-                //const SizedBox(height: 6),
-                //DropdownButtonFormField<String>(
-                //  value: pagamentoSelecionado,
-                //decoration: InputDecoration(
-                //    filled: true,
-                  //  fillColor: Colors.grey[100],
-                    //border: OutlineInputBorder(
-                      //borderRadius: BorderRadius.circular(8),
-                      //borderSide: BorderSide.none,
-                    //),
-                  //),
-                  //items: const [
-                    //DropdownMenuItem(
-                      //value: "Boleto 30 dias",
-                      //child: Text("Boleto 30 dias"),
-                    //),
-                    //DropdownMenuItem(
-                      //value: "Pix à vista",
-                      //child: Text("Pix à vista"),
-                    //),
-                    //DropdownMenuItem(
-                     // value: "Cartão crédito",
-                      //child: Text("Cartão crédito"),
-                    //),
-                  //],
-                  //onChanged: (value) {
-                    //setState(() => pagamentoSelecionado = value);
-                  //},
+               // _buildDropdown(
+                 // label: "Forma de Pagamento",
+                 // value: pagamentoSelecionado,
+                  //items: ["Boleto 30 dias", "Pix à vista", "Cartão crédito"],
+                  //onChanged: (val) => setState(() => pagamentoSelecionado = val),
                 //),
-
-                //const SizedBox(height: 20),
-
-                // Endereço
-                const Text("Endereço"),
-                const SizedBox(height: 6),
-                DropdownButtonFormField<String>(
+                _buildDropdown(
+                  label: "Endereço",
                   value: enderecoSelecionado,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[100],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  items: const [
-                    DropdownMenuItem(
-                      value: "Rua Aruá, 100 - Centro",
-                      child: Text("Rua Aruá, 100 - Centro"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Av. Beira Mar, 240",
-                      child: Text("Av. Beira Mar, 240"),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() => enderecoSelecionado = value);
-                  },
+                  items: ["Rua Aruá, 100 - Centro", "Av. Beira Mar, 240"],
+                  onChanged: (val) => setState(() => enderecoSelecionado = val),
                 ),
 
-                const SizedBox(height: 20),
-
-                // Checkbox
-                Row(
-                  children: [
-                    Checkbox(
-                      value: emergencial,
-                      onChanged: (value) {
-                        setState(() => emergencial = value ?? false);
-                      },
-                    ),
-                    const Text("Emergencial"),
-                  ],
+                _buildCheckbox(
+                  label: "Emergencial",
+                  value: emergencial,
+                  onChanged: (val) => setState(() => emergencial = val ?? false),
                 ),
-
                 const SizedBox(height: 30),
 
-                // Botão
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        CupertinoPageRoute(
-                          builder: (context) => const IncluirItensPage(),
-                        ),
+                        CupertinoPageRoute(builder: (_) => const IncluirItensPage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2196F3),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                      backgroundColor: const Color(0xFF1494F6),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                     child: const Text(
@@ -220,10 +157,24 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                     ),
                   ),
                 ),
+
+                const SizedBox(height: 10),
+                Text(
+                  "Pedido: 103",
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.9),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
               ],
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }

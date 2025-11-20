@@ -1,13 +1,11 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/detalhes_pedido_page.dart';
-import 'package:bmpescados_app/pages/estoque_page.dart'; // Caso RetiradaPage esteja aqui
+import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 
-// Caso a RetiradaPage esteja em outro arquivo, ajuste o import acima ou abaixo:
-// import 'package:bmpescados_app/pages/retirada_page.dart';
 
 class PedidosPage extends StatefulWidget {
   const PedidosPage({super.key});
@@ -18,7 +16,7 @@ class PedidosPage extends StatefulWidget {
 
 class _PedidosPageState extends State<PedidosPage> {
   String filtroSelecionado = "Mais recentes";
-  int _currentIndex = 2; // Marca o ícone Pedidos no BottomNav
+  int _currentIndex = 2;
 
   final List<String> filtros = [
     "Mais recentes",
@@ -38,18 +36,15 @@ class _PedidosPageState extends State<PedidosPage> {
         );
         break;
       case 1:
-        // Supondo que RetiradaPage seja a tela de estoque ou similar
-        // Ajuste o nome da classe conforme seu projeto (ex: RetiradaPage ou TelaEstoque)
         Navigator.pushReplacement(
           context,
           CupertinoPageRoute(builder: (_) => const RetiradaPage()),
         );
         break;
       case 2:
-        // Já está na tela de pedidos
         break;
       case 3:
-        // Navegação para Entregas (se houver)
+        // Navegação para Entregas
         break;
     }
   }
@@ -57,13 +52,12 @@ class _PedidosPageState extends State<PedidosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1494F6), // Azul padrão do App
+      backgroundColor: const Color(0xFF1494F6),
 
       body: Stack(
         children: [
           Column(
             children: [
-              // --- 1. CABEÇALHO AZUL ---
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
                 width: double.infinity,
@@ -78,7 +72,6 @@ class _PedidosPageState extends State<PedidosPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    // Botão de Voltar (Opcional, já que tem a BottomNav)
                     Align(
                       alignment: Alignment.centerLeft,
                       child: IconButton(
@@ -98,7 +91,6 @@ class _PedidosPageState extends State<PedidosPage> {
                 ),
               ),
 
-              // --- 2. CONTEÚDO BRANCO ---
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -114,11 +106,10 @@ class _PedidosPageState extends State<PedidosPage> {
                       20,
                       16,
                       100,
-                    ), // Padding bottom maior para o botão
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Campo de busca
                         TextField(
                           decoration: InputDecoration(
                             hintText: 'Pesquisar pedidos',
@@ -128,14 +119,14 @@ class _PedidosPageState extends State<PedidosPage> {
                             ),
                             filled: true,
                             fillColor: Colors
-                                .grey[100], // Cinza claro para destacar no branco
+                                .grey[100], 
                             contentPadding: const EdgeInsets.symmetric(
                               vertical: 0,
                               horizontal: 16,
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide.none, // Sem borda preta
+                              borderSide: BorderSide.none,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
@@ -147,7 +138,6 @@ class _PedidosPageState extends State<PedidosPage> {
                         ),
                         const SizedBox(height: 12),
 
-                        // Filtros
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -186,7 +176,6 @@ class _PedidosPageState extends State<PedidosPage> {
                         ),
                         const SizedBox(height: 20),
 
-                        // Cards de resumo
                         Row(
                           children: [
                             Expanded(
@@ -201,7 +190,6 @@ class _PedidosPageState extends State<PedidosPage> {
                         ),
                         const SizedBox(height: 20),
 
-                        // Lista de pedidos
                         _cardPedido(
                           numero: 102,
                           entrega: "12/11/2025",
@@ -242,7 +230,6 @@ class _PedidosPageState extends State<PedidosPage> {
             ],
           ),
 
-          // --- 3. BOTÃO FLUTUANTE FIXO "NOVO PEDIDO" ---
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -255,7 +242,7 @@ class _PedidosPageState extends State<PedidosPage> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   elevation: 6,
-                  minimumSize: const Size(double.infinity, 50), // Largura total
+                  minimumSize: const Size(double.infinity, 50), 
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -325,7 +312,6 @@ class _PedidosPageState extends State<PedidosPage> {
       onTap: () {
         Navigator.push(
           context,
-          // Ajuste para a tela correta de estoque/retirada
           CupertinoPageRoute(builder: (_) => const RetiradaPage()),
         );
       },
@@ -441,7 +427,6 @@ class _PedidosPageState extends State<PedidosPage> {
           ),
           const Divider(height: 20),
 
-          // Lista de produtos simplificada
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: produtos

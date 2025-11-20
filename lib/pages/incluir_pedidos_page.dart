@@ -121,7 +121,7 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
         .toList();
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1494F6), // Fundo azul
+      backgroundColor: const Color(0xFF1494F6),
       body: Stack(
         children: [
           Column(
@@ -164,7 +164,6 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
                         ],
                       ),
                     ),
-                    // Filtro de pesquisa
                     Container(
                       padding: const EdgeInsets.all(8),
                       child: SingleChildScrollView(

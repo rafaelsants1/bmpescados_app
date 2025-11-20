@@ -103,7 +103,6 @@ class TelaEstoque extends StatelessWidget {
                         ),
                       ),
 
-                      // Botão de voltar
                       Align(
                         alignment: Alignment.centerLeft,
                         child: IconButton(

@@ -243,8 +243,8 @@ class _DeliveryCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey[100], // A cor cinza do fundo
-        borderRadius: BorderRadius.circular(12), // Bordas arredondadas
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -256,7 +256,6 @@ class _DeliveryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Linha 1: Cliente, Data e Número
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -279,7 +278,6 @@ class _DeliveryCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          // Linha 2: Carga e Botão Detalhes
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -308,7 +306,6 @@ class _DeliveryCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          // Linha 3: Observações
           const Text(
             'Observações:',
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),

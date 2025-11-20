@@ -28,20 +28,16 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // 1. Fundo azul do cabeçalho
       backgroundColor: const Color(0xFF1494F6),
       
-      // 2. O body principal (MANTIDO)
       body: Column(
         children: [
           
-          // 3. O CABEÇALHO
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             width: double.infinity,
             child: Column(
               children: [
-                // LINHA 1: Título e Botão Voltar
                 Expanded(
                   child: Stack(
                     alignment: Alignment.center,
@@ -89,7 +85,6 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
             ),
           ),
 
-          // 4. O CONTEÚDO (Container branco com o formulário)
           Expanded(
             child: Container(
               width: double.infinity,
@@ -260,8 +255,6 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
         ],
       ),
       
-      // AQUI EU REMOVI O SEGUNDO 'BODY' QUE ESTAVA DUPLICADO
-
       bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

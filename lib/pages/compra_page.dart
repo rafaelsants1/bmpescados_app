@@ -9,7 +9,6 @@ import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 
-
 class CompraPage extends StatefulWidget {
   const CompraPage({super.key});
 
@@ -50,7 +49,9 @@ class _CompraPageState extends State<CompraPage> {
               borderSide: BorderSide.none,
             ),
           ),
-          items: items.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
+          items: items
+              .map((item) => DropdownMenuItem(value: item, child: Text(item)))
+              .toList(),
           onChanged: onChanged,
         ),
         const SizedBox(height: 20),
@@ -74,96 +75,147 @@ class _CompraPageState extends State<CompraPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE9F2FF),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2196F3),
-        automaticallyImplyLeading: false,
-        title: const Text(
-          "Nova Compra",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: Center(
-              child: Text(
-                "Ordem de compra: 001",
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Card(
-          elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
+      backgroundColor: const Color(0xFF1494F6),
+      body: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+            width: double.infinity,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Adicionar Compra",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-
-                _buildDropdown(
-                  label: "Cliente",
-                  value: clienteSelecionado,
-                  items: ["Boutique do Peixe", "Pescados do Mar"],
-                  onChanged: (val) => setState(() => clienteSelecionado = val),
-                ),
-                _buildDropdown(
-                  label: "Endereço",
-                  value: enderecoSelecionado,
-                  items: ["Rua Aruá, 100 - Centro", "Av. Beira Mar, 240"],
-                  onChanged: (val) => setState(() => enderecoSelecionado = val),
-                ),
-                const SizedBox(height: 30),
-
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        CupertinoPageRoute(builder: (_) => const IncluirItensPage()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1494F6),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    child: const Text(
-                      "Incluir Produtos",
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
+                Expanded(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      const Text(
+                        'Nova Compra',
+                        style: TextStyle(
+                          fontSize: 26,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                          padding: const EdgeInsets.only(left: 32),
+                          icon: const Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            if (Navigator.of(context).canPop()) {
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
-                const SizedBox(height: 10),
-                Text(
-                  "Pedido: 103",
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                    "Ordem de compra: 001",
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
+
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Card(
+                  elevation:
+                      0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Adicionar Compra",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+
+                        _buildDropdown(
+                          label: "Cliente",
+                          value: clienteSelecionado,
+                          items: ["Boutique do Peixe", "Pescados do Mar"],
+                          onChanged: (val) =>
+                              setState(() => clienteSelecionado = val),
+                        ),
+                        _buildDropdown(
+                          label: "Endereço",
+                          value: enderecoSelecionado,
+                          items: [
+                            "Rua Aruá, 100 - Centro",
+                            "Av. Beira Mar, 240",
+                          ],
+                          onChanged: (val) =>
+                              setState(() => enderecoSelecionado = val),
+                        ),
+
+                        const SizedBox(height: 30),
+
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (_) => const IncluirItensPage(),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF1494F6),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                            ),
+                            child: const Text(
+                              "Incluir Produtos",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
+
       bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// Não precisamos importar tela_pedidos_page aqui para evitar dependência circular,
-// a menos que haja algo específico. O Navigator.pop resolve o voltar.
 
 class DetalhesPedidoPage extends StatelessWidget {
   final int numeroPedido;
@@ -23,11 +21,10 @@ class DetalhesPedidoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1494F6), // Azul padrão
+      backgroundColor: const Color(0xFF1494F6),
 
       body: Column(
         children: [
-          // --- 1. CABEÇALHO AZUL ---
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             width: double.infinity,
@@ -48,7 +45,6 @@ class DetalhesPedidoPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 32),
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                     onPressed: () {
-                      // Simplesmente volta para a tela anterior
                       if (Navigator.of(context).canPop()) {
                         Navigator.of(context).pop();
                       }
@@ -59,7 +55,6 @@ class DetalhesPedidoPage extends StatelessWidget {
             ),
           ),
 
-          // --- 2. CONTEÚDO BRANCO ---
           Expanded(
             child: Container(
               width: double.infinity,
@@ -71,13 +66,12 @@ class DetalhesPedidoPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Card de Status (Cabeçalho do pedido)
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     elevation: 3,
-                    color: Colors.white, // Garante fundo branco no card
+                    color: Colors.white,
                     shadowColor: Colors.black26,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
@@ -142,16 +136,15 @@ class DetalhesPedidoPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
 
-                  // Lista de Produtos (Expanded para ocupar o espaço disponível)
                   Expanded(
                     child: ListView.builder(
-                      padding: EdgeInsets.zero, // Remove padding extra do topo
+                      padding: EdgeInsets.zero,
                       itemCount: produtos.length,
                       itemBuilder: (context, index) {
                         final produto = produtos[index];
                         return Card(
                           elevation: 2,
-                          color: Colors.grey[50], // Leve destaque para o item
+                          color: Colors.grey[50],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -185,7 +178,6 @@ class DetalhesPedidoPage extends StatelessWidget {
 
                   const SizedBox(height: 10),
 
-                  // Total (Fixo na parte inferior do container branco)
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
@@ -212,7 +204,6 @@ class DetalhesPedidoPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Espaço seguro caso o dispositivo tenha barra inferior
                   SizedBox(height: MediaQuery.of(context).padding.bottom),
                 ],
               ),

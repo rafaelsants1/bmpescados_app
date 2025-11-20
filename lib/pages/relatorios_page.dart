@@ -116,11 +116,10 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Aqui você pode adicionar a lógica para "Baixar PDF" ou "Imprimir"
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Download do relatório de $reportTitle iniciado!')),
                     );
-                    Navigator.of(context).pop(); // Fecha o popup após a ação
+                    Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF1494F6),
@@ -206,7 +205,6 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
                         return _ReportListItem(
                           title: title,
                           onTap: () {
-                            // Ação ao clicar em "Gerar"
                             _showPdfVieweePopup(title);
                           },
                         );

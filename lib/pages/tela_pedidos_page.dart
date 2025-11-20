@@ -1,6 +1,6 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
-import 'package:bmpescados_app/pages/detalhes_pedidos_page.dart';
+import 'package:bmpescados_app/pages/detalhes_pedido_page.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart'; // Caso RetiradaPage esteja aqui
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

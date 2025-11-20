@@ -1,3 +1,4 @@
+import 'package:bmpescados_app/pages/compra_page.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
@@ -9,7 +10,6 @@ import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/pages/relatorios_page.dart';
 import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
-import 'package:bmpescados_app/pages/detalhes_pedidos_page.dart';
 import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  bool _obscureText = true;
+  bool _obscu1reText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -239,6 +239,26 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(height: 20),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: DashboardButton(
+                      icon: Icons.shopping_cart,
+                      label: 'Compras',
+                      onTap: () {
+                        // Ação ao clicar
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => CompraPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

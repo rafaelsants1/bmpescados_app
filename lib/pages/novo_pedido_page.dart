@@ -19,31 +19,28 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
   String? enderecoSelecionado = "Rua Aruá, 100 - Centro";
   bool emergencial = false;
 
-  int _selectedIndex = 1; 
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() => _selectedIndex = index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // 1. Fundo azul do cabeçalho
-      backgroundColor: const Color(0xFF1494F6), 
+      backgroundColor: const Color(0xFF1494F6),
       
-      // 2. O body principal agora é uma Column
+      // 2. O body principal (MANTIDO)
       body: Column(
         children: [
           
-          // 3. O CABEÇALHO (padrão que criamos)
+          // 3. O CABEÇALHO
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2, 
+            height: MediaQuery.of(context).size.height * 0.2,
             width: double.infinity,
-            child: Column( 
+            child: Column(
               children: [
-                
                 // LINHA 1: Título e Botão Voltar
                 Expanded(
                   child: Stack(
@@ -67,8 +64,8 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                           ),
                           onPressed: () {
                             if (Navigator.of(context).canPop()) {
-                                  Navigator.of(context).pop();
-                                }
+                              Navigator.of(context).pop();
+                            }
                           },
                         ),
                       ),
@@ -103,7 +100,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Card(
-                  elevation: 0, 
+                  elevation: 0,
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -233,10 +230,10 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 CupertinoPageRoute(
-                                  builder: (context) => const PedidosPage(),
+                                  builder: (_) => const IncluirItensPage(),
                                 ),
                               );
                             },
@@ -263,6 +260,8 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
         ],
       ),
       
+      // AQUI EU REMOVI O SEGUNDO 'BODY' QUE ESTAVA DUPLICADO
+
       bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

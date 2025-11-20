@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:bmpescados_app/pages/updatestock_page.dart';
-import 'package:bmpescados_app/pages/baixar_estoque.dart';
+import 'package:bmpescados_app/pages/baixar_estoque_page.dart';
 
 void main() => runApp(const MyApp());
 

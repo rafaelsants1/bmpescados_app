@@ -45,7 +45,7 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
       'unidade': 'kg',
       'categoria': 'Peixe Inteiro',
       'imagem':
-          'https://kipeixe.com.br/media/catalog/product/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/d/7/d783e009-d9f2-417b-8bbb-9094e603a2e7.jpg',
+          'https://www.naturaldaterra.com.br/_next/image?url=https%3A%2F%2Fnaturalterra.vtexassets.com%2Farquivos%2Fids%2F166537%2FPescada-Branca-Inteira-Fresca-Unidade.jpg%3Fv%3D638671094109270000%26format%3Dwebp&w=1440&q=75',
     },
     {
       'nome': 'Tilápia Inteiro cong.',

@@ -1,8 +1,9 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
+import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:bmpescados_app/pages/pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 
 class NovoPedidoPage extends StatefulWidget {
@@ -65,12 +66,9 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => const IncluirItensPage(),
-                              ),
-                            );
+                            if (Navigator.of(context).canPop()) {
+                                  Navigator.of(context).pop();
+                                }
                           },
                         ),
                       ),
@@ -238,7 +236,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                               Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                  builder: (context) => const IncluirItensPage(),
+                                  builder: (context) => const PedidosPage(),
                                 ),
                               );
                             },

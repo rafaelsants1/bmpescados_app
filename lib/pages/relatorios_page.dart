@@ -29,6 +29,119 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
     });
   }
 
+  void _showPdfVieweePopup(String reportTitle) {
+    showDialog(
+      context: context, 
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Relatório de $reportTitle',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.grey),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.grey[400]!),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.picture_as_pdf, size: 60, color: Colors.redAccent),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Conteúdo do PDF para\n"$reportTitle"',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          '(Simulação)',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ],
+                    ), 
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Aqui você pode adicionar a lógica para "Baixar PDF" ou "Imprimir"
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Download do relatório de $reportTitle iniciado!')),
+                    );
+                    Navigator.of(context).pop(); // Fecha o popup após a ação
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1494F6),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'Baixar PDF',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,12 +206,13 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
                         return _ReportListItem(
                           title: title,
                           onTap: () {
-                            // Ação ao clicar em "Gerar" (por enquanto, vazio)
-                            debugPrint('Gerar relatório: $title');
+                            // Ação ao clicar em "Gerar"
+                            _showPdfVieweePopup(title);
                           },
                         );
                       }).toList(),
                     ),
+                    const SizedBox(height: 80),
                   ],
                 ),
               ),

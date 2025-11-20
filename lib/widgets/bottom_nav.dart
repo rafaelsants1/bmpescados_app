@@ -1,9 +1,11 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
-import 'package:bmpescados_app/pages/pedidos_page.dart';
+import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
+import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/pages/relatorios_page.dart';
 import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
+import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -36,13 +38,13 @@ class CustomBottomNav extends StatelessWidget {
       case 2:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const IncluirItensPage()),
+          MaterialPageRoute(builder: (context) => const PedidosPage()),
         );
         break;
       case 3:
         Navigator.pushReplacement(
           context, 
-          MaterialPageRoute(builder: (context) => const AcompanhamentoEntregaPage())
+          MaterialPageRoute(builder: (context) => const EntregasPendentesPage())
           );
         break;
     }

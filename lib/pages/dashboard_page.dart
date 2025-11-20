@@ -1,11 +1,16 @@
+import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
-import 'package:bmpescados_app/pages/pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
+import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/pages/relatorios_page.dart';
 import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
+import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
+import 'package:bmpescados_app/pages/detalhes_pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
 
@@ -176,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => IncluirItensPage(),
+                            builder: (context) => PedidosPage(),
                           ),
                         );
                       },
@@ -211,7 +216,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const AcompanhamentoEntregaPage()
+                            builder: (context) => const EntregasPendentesPage()
                           ),
                         );
                       },

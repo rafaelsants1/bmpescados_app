@@ -30,9 +30,9 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
       'unidade': 'kg',
       'categoria': 'Peixe Inteiro',
       'imagem':
-          'https://kipeixe.com.br/media/catalog/product/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/d/7/d783e009-d9f2-417b-8bbb-9094e603a2e7.jpg',
+          'https://webstorage.cienciaviva.pt/public/pt.cienciaviva.www/peixes/Pescada-Branca.png',
     },
-    {
+    { 
       'nome': 'Tilápia Inteiro cong.',
       'preco': 39.90,
       'estoque': 80,
@@ -178,6 +178,86 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
                 ),
               ),
 
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  'Cliente: Boutique do Peixe',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
+                ),
+                Text(
+                  'Pedido: 103',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Dropdown Produtos
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 50.0,
+              vertical: 8.0,
+            ),
+            child: Center(
+              child: Container(
+                height: 45,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.grey.shade400),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: selectedOptionDropDown,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    isExpanded: true,
+                    style: const TextStyle(color: Colors.black, fontSize: 16),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedOptionDropDown = newValue!;
+                      });
+                    },
+                    items: [
+                      DropdownMenuItem(
+                        value: 'Buscar Produto',
+                        child: const Text(
+                          'Buscar produto',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                      _buildProductItem(
+                        nome: 'Sardinha pct. 800g',
+                        estoque: 200,
+                      ),
+                      _buildProductItem(
+                        nome: 'Filé de pescada Amarela',
+                        estoque: 30,
+                      ),
+                      _buildProductItem(nome: 'Salmão pct. 800g', estoque: 20),
+                      _buildProductItem(nome: 'Salmão pct. 400g', estoque: 100),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(
@@ -214,7 +294,6 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
             ],
           ),
 
-          // 🔹 Botão fixo com total
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -262,6 +341,31 @@ class _IncluirItensPageState extends State<IncluirItensPage> {
                   ),
                 ),
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  DropdownMenuItem<String> _buildProductItem({
+    required String nome,
+    required int estoque,
+  }) {
+    Color corEstoque = estoque >= 50 ? Colors.green : Colors.red;
+
+    return DropdownMenuItem<String>(
+      value: nome,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(child: Text(nome, style: const TextStyle(fontSize: 16))),
+          Text(
+            '($estoque un.)',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: corEstoque,
             ),
           ),
         ],

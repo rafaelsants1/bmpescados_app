@@ -1,4 +1,5 @@
 import 'package:bmpescados_app/pages/cadastro_vendas.dart';
+import 'package:bmpescados_app/pages/compras_page.dart';
 import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
@@ -234,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => CadastroVendaPage(),
+                            builder: (context) => ComprasPage(),
                           ),
                         );
                       },

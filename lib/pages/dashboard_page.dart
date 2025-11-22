@@ -3,6 +3,7 @@ import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
+import 'package:bmpescados_app/pages/producao_page.dart';
 import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,7 +26,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   int _selectedIndex = 0;
 
@@ -159,10 +159,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   // Card de Produção
                   DashboardButton(
-                    icon: Icons.trending_up,
-                    label: 'Produção',
+                    icon: Icons.shopping_cart,
+                    label: 'Compras',
                     onTap: () {
                       // Ação ao clicar
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => CompraPage(),
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -216,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const EntregasPendentesPage()
+                            builder: (context) => const EntregasPendentesPage(),
                           ),
                         );
                       },
@@ -244,14 +250,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: DashboardButton(
-                      icon: Icons.shopping_cart,
-                      label: 'Compras',
+                      icon: Icons.trending_up_sharp,
+                      label: 'Produção',
                       onTap: () {
                         // Ação ao clicar
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => CompraPage(),
+                            builder: (context) => ProducaoPage(),
                           ),
                         );
                       },

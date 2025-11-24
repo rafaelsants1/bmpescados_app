@@ -1,3 +1,4 @@
+import 'package:bmpescados_app/pages/compra_page.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,10 +30,9 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1494F6),
-      
+
       body: Column(
         children: [
-          
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             width: double.infinity,
@@ -107,7 +107,10 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                       children: [
                         const Text(
                           "Adicionar Pedido",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 20),
 
@@ -225,12 +228,39 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (_) => const IncluirItensPage(),
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.check_circle_outline,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        'Compra realizada com sucesso!',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  backgroundColor: Colors.green,
+                                  duration: const Duration(seconds: 3),
+                                  behavior: SnackBarBehavior.floating,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  margin: const EdgeInsets.all(10),
                                 ),
                               );
+
+                              Future.delayed(const Duration(seconds: 3), () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (_) => const CompraPage(),
+                                  ),
+                                );
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF1494F6),
@@ -240,8 +270,11 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                               padding: const EdgeInsets.symmetric(vertical: 14),
                             ),
                             child: const Text(
-                              "Incluir Produtos",
-                              style: TextStyle(fontSize: 16, color: Colors.white),
+                              "Finalizar Compra",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -254,7 +287,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
           ),
         ],
       ),
-      
+
       bottomNavigationBar: CustomBottomNav(
         currentIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

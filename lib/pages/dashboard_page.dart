@@ -1,5 +1,6 @@
 import 'package:bmpescados_app/pages/compra_page.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
+import 'package:bmpescados_app/pages/motorista_entregas_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
@@ -248,6 +249,22 @@ class _HomePageState extends State<HomePage> {
 
               Row(
                 children: [
+                  Expanded(
+                    child: DashboardButton(
+                      icon: Icons.drive_eta_outlined,
+                      label: 'Motorista',
+                      onTap: () {
+                        // Ação ao clicar
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => MotoristaEntregasPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
                   Expanded(
                     child: DashboardButton(
                       icon: Icons.trending_up_sharp,

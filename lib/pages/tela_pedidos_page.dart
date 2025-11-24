@@ -1,4 +1,5 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
+import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/detalhes_pedido_page.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
@@ -247,7 +248,7 @@ class _PedidosPageState extends State<PedidosPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    CupertinoPageRoute(builder: (_) => const NovoPedidoPage()),
+                    CupertinoPageRoute(builder: (_) => const IncluirItensPage()),
                   );
                 },
                 child: const Text(

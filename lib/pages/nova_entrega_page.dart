@@ -155,7 +155,7 @@ class _AcompanhamentoEntregaPageState extends State<AcompanhamentoEntregaPage> {
                           padding: const EdgeInsets.symmetric(vertical: 14),
                         ),
                         child: const Text(
-                          "Atualizar entrega",
+                          "Adicionar Entrega",
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
-import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
+import 'package:bmpescados_app/pages/nova_entrega_page.dart';
 
 class EntregasPendentesPage extends StatefulWidget {
   const EntregasPendentesPage({super.key});

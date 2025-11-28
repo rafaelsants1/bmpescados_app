@@ -11,7 +11,7 @@ import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/pages/relatorios_page.dart';
-import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
+import 'package:bmpescados_app/pages/nova_entrega_page.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:flutter/material.dart';

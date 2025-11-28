@@ -1,4 +1,5 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
+import 'package:bmpescados_app/pages/finalizar_compra_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/updatestock_page.dart';
@@ -7,14 +8,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-class IncluirItensPage extends StatefulWidget {
-  const IncluirItensPage({super.key});
+class IncluirItens2Page extends StatefulWidget {
+  const IncluirItens2Page({super.key});
 
   @override
-  State<IncluirItensPage> createState() => _IncluirItensPageState();
+  State<IncluirItens2Page> createState() => _IncluirItens2PageState();
 }
 
-class _IncluirItensPageState extends State<IncluirItensPage> {
+class _IncluirItens2PageState extends State<IncluirItens2Page> {
   @override
   int _selectedIndex = 0;
 

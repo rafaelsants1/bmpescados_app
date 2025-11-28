@@ -1,18 +1,19 @@
 import 'package:bmpescados_app/pages/compra_page.dart';
+import 'package:bmpescados_app/pages/compras_page.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
 import 'package:bmpescados_app/pages/motorista_entregas_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
-import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/login_page.dart';
 import 'package:bmpescados_app/pages/producao_page.dart';
-import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
+import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/pages/relatorios_page.dart';
 import 'package:bmpescados_app/pages/entrega_tempo_real.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
-import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
 
@@ -167,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) => CompraPage(),
+                          builder: (context) => ComprasPage(),
                         ),
                       );
                     },
@@ -202,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => RetiradaPage(),
+                            builder: (context) => EstoquePage(),
                           ),
                         );
                       },

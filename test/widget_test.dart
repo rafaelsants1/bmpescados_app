@@ -1,12 +1,13 @@
+import 'package:bmpescados_app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:meu_app/main.dart';
+import 'package:bmpescados_app/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('O app deve iniciar na Dashboard', (WidgetTester tester) async {
 
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const App());
 
 
     expect(find.text('0'), findsOneWidget);

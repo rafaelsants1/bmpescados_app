@@ -35,8 +35,31 @@ class _UpdatePage extends State<UpdatePage> {
     debugPrint('Código: ${_codigoController}');
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Dados de estoque salvos (validação)!')),
+      SnackBar(
+        content: Row(
+          children: const [
+            Icon(Icons.check_circle_outline, color: Colors.white),
+            SizedBox(width: 10),
+            Text(
+              'Item adicionado ao estoque com sucesso!',
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 3),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: const EdgeInsets.all(10),
+      ),
     );
+
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        CupertinoPageRoute(builder: (_) => const EstoquePage()),
+      );
+    });
     _quantidadeController.clear();
     _descricaoController.clear();
     _codigoController.clear();
@@ -61,7 +84,7 @@ class _UpdatePage extends State<UpdatePage> {
     });
   }
 
- @override
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
@@ -87,10 +110,7 @@ class _UpdatePage extends State<UpdatePage> {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     padding: const EdgeInsets.only(left: 32),
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                     onPressed: () {
                       if (Navigator.of(context).canPop()) {
                         Navigator.of(context).pop();
@@ -101,7 +121,7 @@ class _UpdatePage extends State<UpdatePage> {
               ],
             ),
           ),
-          
+
           Expanded(
             child: Container(
               width: double.infinity,
@@ -130,7 +150,10 @@ class _UpdatePage extends State<UpdatePage> {
                       decoration: const InputDecoration(
                         labelText: 'Tipo de produto',
                         border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
                       ),
                       value: _tipoProdutoSelecionado,
                       hint: const Text('Selecione'),
@@ -155,11 +178,16 @@ class _UpdatePage extends State<UpdatePage> {
                         labelText: 'Quantidade',
                         suffixText: 'Kg',
                         border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8), 
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d*\.?\d*$'),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -171,7 +199,10 @@ class _UpdatePage extends State<UpdatePage> {
                         labelText: 'Descrição',
                         border: OutlineInputBorder(),
                         alignLabelWithHint: true,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
                       ),
                       maxLines: 4, // Permite múltiplas linhas
                       keyboardType: TextInputType.multiline,
@@ -184,12 +215,23 @@ class _UpdatePage extends State<UpdatePage> {
                       decoration: InputDecoration(
                         labelText: 'Código',
                         border: const OutlineInputBorder(),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
                         suffixIcon: IconButton(
-                          icon: const Icon(Icons.qr_code_scanner, size: 28, color: Color(0xFF1494F6)),
+                          icon: const Icon(
+                            Icons.qr_code_scanner,
+                            size: 28,
+                            color: Color(0xFF1494F6),
+                          ),
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Abrir scanner de código! (validação)')),
+                              const SnackBar(
+                                content: Text(
+                                  'Abrir scanner de código! (validação)',
+                                ),
+                              ),
                             );
                           },
                         ),
@@ -203,13 +245,16 @@ class _UpdatePage extends State<UpdatePage> {
                         onPressed: _salvarEstoque,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF1494F6),
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40,
+                            vertical: 16,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                         child: const Text(
-                          'Salvar',
+                          'Adicionar',
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),

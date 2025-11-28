@@ -1,10 +1,10 @@
 import 'package:bmpescados_app/pages/compra_page.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
-import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
+import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 
 class NovaCompraPage extends StatefulWidget {
@@ -244,7 +244,7 @@ class _NovaCompraPageState extends State<NovaCompraPage> {
                                     ],
                                   ),
                                   backgroundColor: Colors.green,
-                                  duration: const Duration(seconds: 3),
+                                  duration: const Duration(seconds: 4),
                                   behavior: SnackBarBehavior.floating,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),

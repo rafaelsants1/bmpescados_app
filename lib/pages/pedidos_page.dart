@@ -1,12 +1,12 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
-import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_itens2_page.dart';
+import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/detalhes_pedido_page.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
-
 
 class PedidosPage extends StatefulWidget {
   const PedidosPage({super.key});
@@ -39,7 +39,7 @@ class _PedidosPageState extends State<PedidosPage> {
       case 1:
         Navigator.pushReplacement(
           context,
-          CupertinoPageRoute(builder: (_) => const RetiradaPage()),
+          CupertinoPageRoute(builder: (_) => const EstoquePage()),
         );
         break;
       case 2:
@@ -53,6 +53,24 @@ class _PedidosPageState extends State<PedidosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (context) => const IncluirItens2Page()),
+          );
+        },
+        backgroundColor: const Color(0xFF1494F6),
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: const Text(
+          "Novo Pedido",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
       backgroundColor: const Color(0xFF1494F6),
 
       body: Stack(
@@ -102,12 +120,7 @@ class _PedidosPageState extends State<PedidosPage> {
                     ),
                   ),
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(
-                      16,
-                      20,
-                      16,
-                      100,
-                    ),
+                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 100),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -119,8 +132,7 @@ class _PedidosPageState extends State<PedidosPage> {
                               color: Colors.grey,
                             ),
                             filled: true,
-                            fillColor: Colors
-                                .grey[100], 
+                            fillColor: Colors.grey[100],
                             contentPadding: const EdgeInsets.symmetric(
                               vertical: 0,
                               horizontal: 16,
@@ -230,38 +242,6 @@ class _PedidosPageState extends State<PedidosPage> {
               ),
             ],
           ),
-
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1494F6),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 6,
-                  minimumSize: const Size(double.infinity, 50), 
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (_) => const IncluirItensPage()),
-                  );
-                },
-                child: const Text(
-                  "Novo Pedido",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
 
@@ -313,7 +293,7 @@ class _PedidosPageState extends State<PedidosPage> {
       onTap: () {
         Navigator.push(
           context,
-          CupertinoPageRoute(builder: (_) => const RetiradaPage()),
+          CupertinoPageRoute(builder: (_) => const EstoquePage()),
         );
       },
       borderRadius: BorderRadius.circular(12),

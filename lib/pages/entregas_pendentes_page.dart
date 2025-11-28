@@ -1,3 +1,4 @@
+import 'package:bmpescados_app/pages/motorista_entregas_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
@@ -109,52 +110,7 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
                           ),
                         ),
                         const SizedBox(width: 12),
-
-                        Expanded(
-                          child: Container(
-                            height: 100,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Icon(
-                                      Icons.map_outlined,
-                                      size: 32,
-                                      color: Color(0xFF1494F6),
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(height: 8, width: 4),
-                                    Text(
-                                      'Organizar Rota',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        Expanded(child: _cardRotas()),
                       ],
                     ),
 
@@ -206,7 +162,7 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
         onItemTapped: _onItemTapped,
       ),
 
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
             context,
@@ -216,7 +172,62 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
           );
         },
         backgroundColor: const Color(0xFF1494F6),
-        child: const Icon(Icons.add, color: Colors.white),
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: const Text(
+          "Nova Entrega",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _cardRotas() {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (_) => const MotoristaEntregasPage()),
+        );
+      },
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        height: 100,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Organizar Rotas",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Colors.black87,
+                  ),
+                ),
+                SizedBox(width: 2),
+                Icon(Icons.map_outlined, color: const Color(0xFF1494F6)),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

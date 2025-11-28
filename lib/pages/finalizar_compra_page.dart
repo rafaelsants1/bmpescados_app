@@ -1,4 +1,5 @@
 import 'package:bmpescados_app/pages/compra_page.dart';
+import 'package:bmpescados_app/pages/compras_page.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,14 +8,14 @@ import 'package:flutter/services.dart';
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 
-class NovoPedidoPage extends StatefulWidget {
-  const NovoPedidoPage({super.key});
+class FinalizarCompraPage extends StatefulWidget {
+  const FinalizarCompraPage({super.key});
 
   @override
-  State<NovoPedidoPage> createState() => _NovoPedidoPageState();
+  State<FinalizarCompraPage> createState() => _FinalizarCompraPageState();
 }
 
-class _NovoPedidoPageState extends State<NovoPedidoPage> {
+class _FinalizarCompraPageState extends State<FinalizarCompraPage> {
   String? clienteSelecionado = "Boutique do Peixe";
   String? pagamentoSelecionado = "Boleto 30 dias";
   String? enderecoSelecionado = "Rua Aruá, 100 - Centro";
@@ -43,7 +44,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                     alignment: Alignment.center,
                     children: [
                       const Text(
-                        'Finalizar Pedido',
+                        'Finalizar Compra',
                         style: TextStyle(
                           fontSize: 26,
                           color: Colors.white,
@@ -105,6 +106,13 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Text(
+                          "Adicionar Pedido",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const SizedBox(height: 20),
 
                         // Cliente
@@ -231,7 +239,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                                       ),
                                       SizedBox(width: 10),
                                       Text(
-                                        'Pedido realizado com sucesso!',
+                                        'Compra realizada com sucesso!',
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ],
@@ -250,7 +258,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   CupertinoPageRoute(
-                                    builder: (_) => const PedidosPage(),
+                                    builder: (_) => const ComprasPage(),
                                   ),
                                 );
                               });
@@ -263,7 +271,7 @@ class _NovoPedidoPageState extends State<NovoPedidoPage> {
                               padding: const EdgeInsets.symmetric(vertical: 14),
                             ),
                             child: const Text(
-                              "Finalizar Pedido",
+                              "Finalizar Compra",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,

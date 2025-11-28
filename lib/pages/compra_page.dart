@@ -1,9 +1,10 @@
+import 'package:bmpescados_app/pages/compras_page.dart';
 import 'package:bmpescados_app/pages/dashboard_page.dart';
-import 'package:bmpescados_app/pages/incluir_pedidos_page.dart';
+import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:bmpescados_app/pages/tela_pedidos_page.dart';
+import 'package:bmpescados_app/pages/pedidos_page.dart';
 import 'package:bmpescados_app/pages/baixar_estoque_page.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
@@ -139,8 +140,7 @@ class _CompraPageState extends State<CompraPage> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Card(
-                  elevation:
-                      0,
+                  elevation: 0,
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -157,7 +157,7 @@ class _CompraPageState extends State<CompraPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(width: 20),
 
                         _buildDropdown(
                           label: "Cliente",
@@ -176,7 +176,6 @@ class _CompraPageState extends State<CompraPage> {
                           onChanged: (val) =>
                               setState(() => enderecoSelecionado = val),
                         ),
-
                         const SizedBox(height: 30),
 
                         SizedBox(

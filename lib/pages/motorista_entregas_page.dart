@@ -72,7 +72,7 @@ class _MotoristaEntregasPageState extends State<MotoristaEntregasPage> {
     );
   }
 
-  int _selectedIndex = 0; // Índice padrão para a navegação inferior
+  int _selectedIndex = 3; // Índice padrão para a navegação inferior
 
   void _onItemTapped(int index) {
     setState(() {
@@ -101,7 +101,7 @@ class _MotoristaEntregasPageState extends State<MotoristaEntregasPage> {
               alignment: Alignment.center,
               children: [
                 const Text(
-                  'Entregas',
+                  'Motorista',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,

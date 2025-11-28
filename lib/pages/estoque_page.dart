@@ -15,19 +15,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RetiradaPage(),
+      home: EstoquePage(),
     );
   }
 }
 
-class RetiradaPage extends StatefulWidget {
-  const RetiradaPage({super.key});
+class EstoquePage extends StatefulWidget {
+  const EstoquePage({super.key});
 
   @override
-  State<RetiradaPage> createState() => _RetiradaPageState();
+  State<EstoquePage> createState() => _EstoquePageState();
 }
 
-class _RetiradaPageState extends State<RetiradaPage> {
+class _EstoquePageState extends State<EstoquePage> {
   int _selectedIndex = 1;
 
   final Map<String, double> estoque = {
@@ -220,7 +220,7 @@ class TelaEstoque extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
             context,
@@ -228,7 +228,15 @@ class TelaEstoque extends StatelessWidget {
           );
         },
         backgroundColor: const Color(0xFF1494F6),
-        child: const Icon(Icons.add, color: Colors.white),
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: const Text(
+          "Adicionar ao Estoque",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
       ),
     );
   }

@@ -128,162 +128,164 @@ class _HomePageState extends State<HomePage> {
       ),
 
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: size.width * 0.35,
-                    height: size.width * 0.30,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Olá,',
-                          style: TextStyle(color: Colors.white, fontSize: 28),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          'Altemir!',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 34,
-                            fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: size.width * 0.35,
+                      height: size.width * 0.30,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Olá,',
+                            style: TextStyle(color: Colors.white, fontSize: 28),
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 4),
+                          Text(
+                            'Altemir!',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 34,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  // Card de Produção
-                  DashboardButton(
-                    icon: Icons.shopping_cart,
-                    label: 'Compras',
-                    onTap: () {
-                      // Ação ao clicar
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => ComprasPage(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 20),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: DashboardButton(
-                      icon: Icons.list_alt,
-                      label: 'Pedidos',
+                    // Card de Produção
+                    DashboardButton(
+                      icon: Icons.shopping_cart,
+                      label: 'Compras',
                       onTap: () {
                         // Ação ao clicar
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => PedidosPage(),
+                            builder: (context) => ComprasPage(),
                           ),
                         );
                       },
                     ),
-                  ),
-                  Expanded(
-                    child: DashboardButton(
-                      icon: Icons.inventory,
-                      label: 'Estoque',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => EstoquePage(),
-                          ),
-                        );
-                      },
+                  ],
+                ),
+          
+                const SizedBox(height: 20),
+          
+                Row(
+                  children: [
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.list_alt,
+                        label: 'Pedidos',
+                        onTap: () {
+                          // Ação ao clicar
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => PedidosPage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 20),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: DashboardButton(
-                      icon: Icons.local_shipping,
-                      label: 'Entregas',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const EntregasPendentesPage(),
-                          ),
-                        );
-                      },
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.inventory,
+                        label: 'Estoque',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => EstoquePage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: DashboardButton(
-                      icon: Icons.article,
-                      label: 'Relatórios',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const RelatoriosPage(),
-                          ),
-                        );
-                      },
+                  ],
+                ),
+          
+                const SizedBox(height: 20),
+          
+                Row(
+                  children: [
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.local_shipping,
+                        label: 'Entregas',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const EntregasPendentesPage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: DashboardButton(
-                      icon: Icons.drive_eta_outlined,
-                      label: 'Motorista',
-                      onTap: () {
-                        // Ação ao clicar
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => MotoristaEntregasPage(),
-                          ),
-                        );
-                      },
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.article,
+                        label: 'Relatórios',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const RelatoriosPage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-
-                  Expanded(
-                    child: DashboardButton(
-                      icon: Icons.trending_up_sharp,
-                      label: 'Produção',
-                      onTap: () {
-                        // Ação ao clicar
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => ProducaoPage(),
-                          ),
-                        );
-                      },
+                  ],
+                ),
+                const SizedBox(height: 20),
+          
+                Row(
+                  children: [
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.drive_eta_outlined,
+                        label: 'Motorista',
+                        onTap: () {
+                          // Ação ao clicar
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => MotoristaEntregasPage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+          
+                    Expanded(
+                      child: DashboardButton(
+                        icon: Icons.trending_up_sharp,
+                        label: 'Produção',
+                        onTap: () {
+                          // Ação ao clicar
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => ProducaoPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

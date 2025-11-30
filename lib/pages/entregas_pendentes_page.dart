@@ -9,8 +9,6 @@ class EntregasPendentesPage extends StatefulWidget {
 }
 
 class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
-
-  
   final List<Map<String, dynamic>> entregas = [
     {
       "cliente": "UFS - Universidade Federal de Sergipe",
@@ -42,7 +40,6 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
     }
   }
 
-  
   void _abrirPopupStatus(int index) {
     showDialog(
       context: context,
@@ -106,7 +103,6 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
     );
   }
 
- 
   Widget _opcaoStatus(int index, String status, Color cor) {
     return GestureDetector(
       onTap: () {
@@ -145,11 +141,8 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF1494F6),
 
-      
       body: Column(
         children: [
-
-          
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.18,
             child: Stack(
@@ -176,7 +169,6 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
             ),
           ),
 
-         
           Expanded(
             child: Container(
               width: double.infinity,
@@ -203,8 +195,6 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
-                         
                           Text(
                             entrega['cliente'],
                             style: const TextStyle(
@@ -216,18 +206,23 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
 
                           const SizedBox(height: 6),
 
-                          
                           Text(
                             entrega['descricao'],
-                            style: const TextStyle(fontSize: 14, color: Colors.black54),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                            ),
                           ),
 
                           const SizedBox(height: 12),
 
-                          
                           Row(
                             children: [
-                              Icon(Icons.circle, color: _corStatus(entrega['status']), size: 14),
+                              Icon(
+                                Icons.circle,
+                                color: _corStatus(entrega['status']),
+                                size: 14,
+                              ),
                               const SizedBox(width: 6),
                               Text(
                                 entrega['status'],
@@ -241,7 +236,6 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
 
                           const SizedBox(height: 14),
 
-                        
                           SizedBox(
                             width: double.infinity,
                             height: 42,
@@ -255,7 +249,10 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
                               ),
                               child: const Text(
                                 "Atualizar status",
-                                style: TextStyle(color: Colors.white, fontSize: 15),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
                           ),
@@ -273,7 +270,7 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
       bottomNavigationBar: CustomBottomNav(
         currentIndex: 3,
         onItemTapped: (i) {},
-      ),
-    );
-  }
+      ),
+    );
+  }
 }

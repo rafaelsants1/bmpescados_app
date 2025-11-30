@@ -1,9 +1,5 @@
-import 'package:bmpescados_app/pages/motorista_entregas_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
-import 'package:bmpescados_app/pages/nova_entrega_page.dart';
 
 class EntregasPendentesPage extends StatefulWidget {
   const EntregasPendentesPage({super.key});
@@ -13,29 +9,154 @@ class EntregasPendentesPage extends StatefulWidget {
 }
 
 class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
-  int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  
+  final List<Map<String, dynamic>> entregas = [
+    {
+      "cliente": "UFS - Universidade Federal de Sergipe",
+      "descricao": "Salmão e merluza — Pedido #1025",
+      "status": "Pendente",
+    },
+    {
+      "cliente": "Restaurante Sabor da Praia",
+      "descricao": "Peixes frescos e camarões — Pedido #1023",
+      "status": "Pendente",
+    },
+    {
+      "cliente": "Peixaria do Zé",
+      "descricao": "Caixa de tilápias — Pedido #1024",
+      "status": "Pendente",
+    },
+  ];
+
+  Color _corStatus(String status) {
+    switch (status) {
+      case "A caminho":
+        return Colors.blue;
+      case "Em trânsito":
+        return Colors.orange;
+      case "Entregue":
+        return Colors.green;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  
+  void _abrirPopupStatus(int index) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Center(
+          child: Material(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            child: Container(
+              width: 330,
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "Atualizar Status",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1494F6),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  _opcaoStatus(index, "A caminho", Colors.blue),
+                  const SizedBox(height: 14),
+
+                  _opcaoStatus(index, "Em trânsito", Colors.orange),
+                  const SizedBox(height: 14),
+
+                  _opcaoStatus(index, "Entregue", Colors.green),
+
+                  const SizedBox(height: 20),
+
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text(
+                      "Cancelar",
+                      style: TextStyle(color: Colors.black54, fontSize: 15),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+ 
+  Widget _opcaoStatus(int index, String status, Color cor) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          entregas[index]['status'] = status;
+        });
+        Navigator.pop(context);
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: cor.withOpacity(0.4)),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.circle, color: cor, size: 16),
+            const SizedBox(width: 10),
+            Text(
+              status,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: cor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1494F6),
+
+      
       body: Column(
         children: [
+
+          
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
-            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.18,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 const Text(
-                  'Entregas\nPendentes',
-                  textAlign: TextAlign.center,
+                  "Entregas Pendentes",
                   style: TextStyle(
                     fontSize: 26,
                     color: Colors.white,
@@ -46,111 +167,103 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: IconButton(
-                    padding: const EdgeInsets.only(left: 32),
+                    padding: const EdgeInsets.only(left: 20),
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                    onPressed: () {
-                      if (Navigator.of(context).canPop()) {
-                        Navigator.of(context).pop();
-                      }
-                    },
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
               ],
             ),
           ),
 
+         
           Expanded(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 100,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text(
-                                  '4',
-                                  style: TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  'Entregas Pendentes',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                              ],
+
+              child: ListView.builder(
+                itemCount: entregas.length,
+                itemBuilder: (context, index) {
+                  final entrega = entregas[index];
+
+                  return Card(
+                    elevation: 3,
+                    shadowColor: Colors.black26,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                         
+                          Text(
+                            entrega['cliente'],
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(child: _cardRotas()),
-                      ],
+
+                          const SizedBox(height: 6),
+
+                          
+                          Text(
+                            entrega['descricao'],
+                            style: const TextStyle(fontSize: 14, color: Colors.black54),
+                          ),
+
+                          const SizedBox(height: 12),
+
+                          
+                          Row(
+                            children: [
+                              Icon(Icons.circle, color: _corStatus(entrega['status']), size: 14),
+                              const SizedBox(width: 6),
+                              Text(
+                                entrega['status'],
+                                style: TextStyle(
+                                  color: _corStatus(entrega['status']),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 14),
+
+                        
+                          SizedBox(
+                            width: double.infinity,
+                            height: 42,
+                            child: ElevatedButton(
+                              onPressed: () => _abrirPopupStatus(index),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF1494F6),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: const Text(
+                                "Atualizar status",
+                                style: TextStyle(color: Colors.white, fontSize: 15),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-
-                    const SizedBox(height: 20),
-
-                    const _DeliveryCard(
-                      cliente: 'Universidade Feder...',
-                      data: '12/09/2025',
-                      numero: '#00001',
-                      carga: '660kg',
-                      observacao: 'Realizar entrega entre 10:00h e 15:00h',
-                    ),
-
-                    const _DeliveryCard(
-                      cliente: 'GBarbosa Cencosud',
-                      data: '23/11/2025',
-                      numero: '#00004',
-                      carga: '375kg',
-                      observacao: 'Sem observações',
-                    ),
-
-                    const _DeliveryCard(
-                      cliente: 'Cabana do Camarão',
-                      data: '26/11/2025',
-                      numero: '#00003',
-                      carga: '148kg',
-                      observacao: 'Entrega de camarão',
-                    ),
-
-                    const _DeliveryCard(
-                      cliente: 'Atacadão',
-                      data: '12/09/2025',
-                      numero: '#00002',
-                      carga: '450kg',
-                      observacao: 'Sem observações',
-                    ),
-
-                    const SizedBox(height: 80),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
           ),
@@ -159,177 +272,8 @@ class _EntregasPendentesPageState extends State<EntregasPendentesPage> {
 
       bottomNavigationBar: CustomBottomNav(
         currentIndex: 3,
-        onItemTapped: _onItemTapped,
-      ),
-
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => const AcompanhamentoEntregaPage(),
-            ),
-          );
-        },
-        backgroundColor: const Color(0xFF1494F6),
-        icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text(
-          "Nova Entrega",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _cardRotas() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(builder: (_) => const MotoristaEntregasPage()),
-        );
-      },
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        height: 100,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Organizar Rotas",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(width: 2),
-                Icon(Icons.map_outlined, color: const Color(0xFF1494F6)),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _DeliveryCard extends StatelessWidget {
-  final String cliente;
-  final String data;
-  final String numero;
-  final String carga;
-  final String observacao;
-
-  const _DeliveryCard({
-    required this.cliente,
-    required this.data,
-    required this.numero,
-    required this.carga,
-    required this.observacao,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                cliente,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Data: $data',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              Text(
-                'N° $numero',
-                style: const TextStyle(fontSize: 12, color: Colors.black87),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Carga:',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  Text(carga, style: const TextStyle(fontSize: 14)),
-                ],
-              ),
-              const Spacer(),
-              // Botão Detalhes
-              Column(
-                children: const [
-                  Icon(Icons.chevron_right, size: 28, color: Colors.black87),
-                  Text(
-                    'Detalhes',
-                    style: TextStyle(fontSize: 10, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-
-          const Text(
-            'Observações:',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            observacao,
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.black.withOpacity(0.6),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        onItemTapped: (i) {},
+      ),
+    );
+  }
 }

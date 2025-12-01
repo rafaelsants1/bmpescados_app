@@ -1,14 +1,11 @@
 import 'package:bmpescados_app/pages/dashboard_page.dart';
 import 'package:bmpescados_app/pages/incluir_itens2_page.dart';
-import 'package:bmpescados_app/pages/incluir_itens_page.dart';
-import 'package:bmpescados_app/pages/novo_pedido_page.dart';
 import 'package:bmpescados_app/pages/detalhes_pedido_page.dart';
 import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
-
 
 class PedidosPage extends StatefulWidget {
   const PedidosPage({super.key});
@@ -74,11 +71,11 @@ class _PedidosPageState extends State<PedidosPage> {
         ),
       ),
       backgroundColor: const Color(0xFF1494F6),
-
       body: Stack(
         children: [
           Column(
             children: [
+              // --- Header Azul ---
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
                 width: double.infinity,
@@ -111,7 +108,7 @@ class _PedidosPageState extends State<PedidosPage> {
                   ],
                 ),
               ),
-
+              // --- Corpo Branco ---
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -126,6 +123,7 @@ class _PedidosPageState extends State<PedidosPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Campo de Busca
                         TextField(
                           decoration: InputDecoration(
                             hintText: 'Pesquisar pedidos',
@@ -153,6 +151,7 @@ class _PedidosPageState extends State<PedidosPage> {
                         ),
                         const SizedBox(height: 12),
 
+                        // Filtros
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -169,9 +168,8 @@ class _PedidosPageState extends State<PedidosPage> {
                                   selectedColor: const Color(0xFF1494F6),
                                   backgroundColor: Colors.grey[100],
                                   labelStyle: TextStyle(
-                                    color: ativo
-                                        ? Colors.white
-                                        : Colors.black87,
+                                    color:
+                                        ativo ? Colors.white : Colors.black87,
                                     fontWeight: ativo
                                         ? FontWeight.bold
                                         : FontWeight.normal,
@@ -191,16 +189,19 @@ class _PedidosPageState extends State<PedidosPage> {
                         ),
                         const SizedBox(height: 20),
 
+                        // Cards de Resumo
                         Row(
                           children: [
                             Expanded(
                               child: _cardResumo(
                                 '3 pedidos a caminho',
                                 Icons.local_shipping,
-                                (){
-                                Navigator.push(
+                                () {
+                                  Navigator.push(
                                     context,
-                                    CupertinoPageRoute(builder: (_) => const EntregasPendentesPage()),
+                                    CupertinoPageRoute(
+                                        builder: (_) =>
+                                            const EntregasPendentesPage()),
                                   );
                                 },
                               ),
@@ -211,37 +212,64 @@ class _PedidosPageState extends State<PedidosPage> {
                         ),
                         const SizedBox(height: 20),
 
+                        // --- LISTA DE PEDIDOS ---
+
+                        // --- PEDIDO 102 ---
                         _cardPedido(
                           numero: 102,
-                          entrega: "12/11/2025",
+                          entrega: "03/12/2025",
                           status: "Em Produção",
                           corStatus: Colors.orange,
+                          nomeCliente: "Restaurante Frutos do Mar", // Visual
                           produtos: [
-                            "Salmão pct. 800g",
-                            "Filé de Pescada Amarela Pct.800g",
+                            'Salmão 1 pct. 800g (R\$ 69,90 un)',
+                            'Filé Pescada 1 pct. 800g (R\$ 79,90 un)',
                           ],
-                          total: "2 pacotes 800g",
+                          quantidadeTotal: "2 pacotes 800g",
+                          valorTotal: "R\$ 179,80",
+                          // Dados extras para Detalhes
+                          formaPagamento: "Pix",
+                          endereco: "Av. Beira Mar, 1500 - Atalaia",
                         ),
+
                         const SizedBox(height: 12),
+
+                        // --- PEDIDO 101 ---
                         _cardPedido(
                           numero: 101,
-                          entrega: "10/11/2025",
+                          entrega: "04/12/2025",
                           status: "Em Produção",
                           corStatus: Colors.orange,
+                          nomeCliente: "Peixaria Central", // Visual
                           produtos: [
-                            "Sardinha pct. 800g",
-                            "Filé de Pescada Amarela Pct.800g",
+                            'Sardinha 1 pct. 800g (R\$ 59,90 un)',
+                            'Filé Pescada 1 pct. 800g (R\$ 79,90 un)',
                           ],
-                          total: "2 pacotes 800g",
+                          quantidadeTotal: "2 pacotes 800g",
+                          valorTotal: "R\$ 139,80",
+                          // Dados extras para Detalhes
+                          formaPagamento: "Boleto (15 dias)",
+                          endereco: "Rua do Comércio, 32 - Centro",
                         ),
+
                         const SizedBox(height: 12),
+
+                        // --- PEDIDO 100 ---
                         _cardPedido(
                           numero: 100,
-                          entrega: "15/08/2025",
+                          entrega: "29/11/2025",
                           status: "Entregue",
                           corStatus: Colors.green,
-                          produtos: ["Salmão – 20kg", "Cavala – 220kg"],
-                          total: "425kg",
+                          nomeCliente: "Supermercado Preço Bom", // Visual
+                          produtos: [
+                            "Salmão 1 pct. 800g  (R\$ 69,90)",
+                            "Cavala 1 pct. 800g  (R\$ 39,90)"
+                          ],
+                          quantidadeTotal: "2 pacotes 800g",
+                          valorTotal: "R\$ 109,80",
+                          // Dados extras para Detalhes
+                          formaPagamento: "Transferência Bancária",
+                          endereco: "Av. Tancredo Neves, 500",
                         ),
                       ],
                     ),
@@ -252,7 +280,6 @@ class _PedidosPageState extends State<PedidosPage> {
           ),
         ],
       ),
-
       bottomNavigationBar: CustomBottomNav(
         currentIndex: _currentIndex,
         onItemTapped: _onItemTapped,
@@ -262,43 +289,43 @@ class _PedidosPageState extends State<PedidosPage> {
 
   // ---------- Widgets auxiliares ----------
 
-  Widget _cardResumo(String texto, IconData icone, VoidCallback onTap) { // 💡 ADICIONE O PARÂMETRO onTap AQUI
-  return InkWell( // 💡 ENVOLVA EM UM InkWell
-    onTap: onTap, // 💡 USE O PARAMETRO onTap
-    borderRadius: BorderRadius.circular(12),
-    child: Container(
-      height: 100, // Altura fixa para alinhar
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icone, size: 32, color: const Color(0xFF1494F6)),
-          const SizedBox(height: 8),
-          Text(
-            texto,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 13,
-              color: Colors.black87,
+  Widget _cardResumo(String texto, IconData icone, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        height: 100,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
             ),
-          ),
-        ],
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icone, size: 32, color: const Color(0xFF1494F6)),
+            const SizedBox(height: 8),
+            Text(
+              texto,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+                color: Colors.black87,
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _cardEstoque() {
     return InkWell(
@@ -359,7 +386,13 @@ class _PedidosPageState extends State<PedidosPage> {
     required String status,
     required Color corStatus,
     required List<String> produtos,
-    required String total,
+    required String quantidadeTotal,
+    required String valorTotal,
+    // Novos parâmetros
+    String? imagemUrl,
+    required String nomeCliente,
+    required String formaPagamento,
+    required String endereco,
   }) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -378,7 +411,7 @@ class _PedidosPageState extends State<PedidosPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Cabeçalho do Card
+          // Cabeçalho do Card (Número + Status)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -418,30 +451,104 @@ class _PedidosPageState extends State<PedidosPage> {
             "Entrega: $entrega",
             style: const TextStyle(color: Colors.grey, fontSize: 13),
           ),
-          const Divider(height: 20),
 
-          Column(
+          // --- NOME DO CLIENTE VISÍVEL NO CARD ---
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const Icon(Icons.person, size: 18, color: Color(0xFF1494F6)),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  nomeCliente,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.black87,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          // -------------------------------------
+
+          const Divider(height: 15),
+
+          // Layout com Imagem + Produtos
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: produtos
-                .map(
-                  (prod) => Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Text(
-                      "• $prod",
-                      style: const TextStyle(fontSize: 14),
+            children: [
+              // Se tiver imagem, exibe ela
+              if (imagemUrl != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      imagemUrl,
+                      height: 60,
+                      width: 60,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          height: 60,
+                          width: 60,
+                          color: Colors.grey[200],
+                          child: const Icon(Icons.broken_image,
+                              color: Colors.grey),
+                        );
+                      },
                     ),
                   ),
-                )
-                .toList(),
+                ),
+
+              // Lista de Produtos (Fica ao lado da imagem)
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: produtos
+                      .map(
+                        (prod) => Padding(
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Text(
+                            "• $prod",
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.black87),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
+
+          const Divider(height: 15),
+
+          // Área de Totais
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Volume: $quantidadeTotal",
+                style: const TextStyle(
+                    color: Colors.grey, fontWeight: FontWeight.w500),
+              ),
+              Text(
+                "Total: $valorTotal",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.green,
+                ),
+              ),
+            ],
           ),
 
           const SizedBox(height: 10),
-          Text(
-            "Total: $total",
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
 
-          const SizedBox(height: 10),
+          // Botão Ver Mais
           Align(
             alignment: Alignment.centerRight,
             child: InkWell(
@@ -454,33 +561,40 @@ class _PedidosPageState extends State<PedidosPage> {
                       dataEntrega: entrega,
                       status: status,
                       corStatus: corStatus,
-                      total: total,
-                      produtos: produtos
-                          .map(
-                            (p) => {
-                              "nome": p,
-                              "quantidade": p.contains("kg")
-                                  ? p.split("–").last.trim()
-                                  : "1 un",
-                            },
-                          )
-                          .toList(),
+                      volumeTotal: quantidadeTotal,
+                      valorTotal: valorTotal,
+                      // Passando os dados do cliente para a tela de detalhes
+                      nomeCliente: nomeCliente,
+                      formaPagamento: formaPagamento,
+                      endereco: endereco,
+                      produtos: produtos.map((p) {
+                        return {
+                          "nome": p,
+                          "quantidade": p.contains("kg")
+                              ? p.split("–").last.trim()
+                              : "1 un",
+                        };
+                      }).toList(),
                     ),
                   ),
                 );
               },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    "Ver mais",
-                    style: TextStyle(
-                      color: Color(0xFF1494F6),
-                      fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text(
+                      "Ver detalhes",
+                      style: TextStyle(
+                        color: Color(0xFF1494F6),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Icon(Icons.chevron_right, color: Color(0xFF1494F6), size: 20),
-                ],
+                    Icon(Icons.chevron_right,
+                        color: Color(0xFF1494F6), size: 20),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:bmpescados_app/pages/alertas_page.dart';
 import 'package:bmpescados_app/pages/compra_page.dart';
 import 'package:bmpescados_app/pages/compras_page.dart';
 import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
@@ -16,6 +17,7 @@ import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
 import 'package:bmpescados_app/pages/incluir_itens_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dashboard_button.dart';
+import 'alertas_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,6 +48,22 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color(0xFF1494F6),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.warning_amber_rounded,
+              color: Colors.white,
+              size: 30,
+            ),
+            tooltip: "Alertas do sistema",
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => const AlertsPage()),
+              );
+            },
+          ),
+        ],
         backgroundColor: const Color(0xFF1494F6),
         leading: PopupMenuButton<String>(
           color: const Color(0xFFFFFFFF),
@@ -176,9 +194,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-          
+
                 const SizedBox(height: 20),
-          
+
                 Row(
                   children: [
                     Expanded(
@@ -212,9 +230,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-          
+
                 const SizedBox(height: 20),
-          
+
                 Row(
                   children: [
                     Expanded(
@@ -225,7 +243,8 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (context) => const EntregasPendentesPage(),
+                              builder: (context) =>
+                                  const EntregasPendentesPage(),
                             ),
                           );
                         },
@@ -248,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-          
+
                 Row(
                   children: [
                     Expanded(
@@ -266,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-          
+
                     Expanded(
                       child: DashboardButton(
                         icon: Icons.trending_up_sharp,

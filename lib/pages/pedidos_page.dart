@@ -7,6 +7,8 @@ import 'package:bmpescados_app/pages/estoque_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bmpescados_app/widgets/bottom_nav.dart';
+import 'package:bmpescados_app/pages/entregas_pendentes_page.dart';
+
 
 class PedidosPage extends StatefulWidget {
   const PedidosPage({super.key});
@@ -195,6 +197,12 @@ class _PedidosPageState extends State<PedidosPage> {
                               child: _cardResumo(
                                 '3 pedidos a caminho',
                                 Icons.local_shipping,
+                                (){
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(builder: (_) => const EntregasPendentesPage()),
+                                  );
+                                },
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -254,8 +262,11 @@ class _PedidosPageState extends State<PedidosPage> {
 
   // ---------- Widgets auxiliares ----------
 
-  Widget _cardResumo(String texto, IconData icone) {
-    return Container(
+  Widget _cardResumo(String texto, IconData icone, VoidCallback onTap) { // 💡 ADICIONE O PARÂMETRO onTap AQUI
+  return InkWell( // 💡 ENVOLVA EM UM InkWell
+    onTap: onTap, // 💡 USE O PARAMETRO onTap
+    borderRadius: BorderRadius.circular(12),
+    child: Container(
       height: 100, // Altura fixa para alinhar
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -285,8 +296,9 @@ class _PedidosPageState extends State<PedidosPage> {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _cardEstoque() {
     return InkWell(

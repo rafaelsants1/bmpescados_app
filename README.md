@@ -68,7 +68,7 @@ Para rodar este projeto localmente, você precisará do Flutter SDK instalado e 
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [LINK_DO_SEU_REPOSITORIO_AQUI.git]
+    git clone [LINK_DO_REPOSITORIO_AQUI.git]
     ```
 
 2.  **Entre na pasta do projeto:**
@@ -90,6 +90,6 @@ Para rodar este projeto localmente, você precisará do Flutter SDK instalado e 
 
 ---
 
-## 📂 Estrutura de Pastas (Sugestão)
+## 📂 Estrutura de Pastas
 
 A estrutura do projeto segue as boas práticas do Flutter:
